@@ -1,0 +1,64 @@
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+    
+# Run on available environments on GHA
+# as on 2020-08-30
+
+name: CITATION-cff full matrix
+jobs:
+  Validate-CITATION-cff:
+  
+    runs-on: ${{ matrix.config.os }}
+    name: ${{ matrix.config.os }}
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: ubuntu-latest}
+          - {os: ubuntu-20.04}
+          - {os: ubuntu-18.04}
+          - {os: macos-11}
+          - {os: macos-latest}
+          - {os: macos-10.15}
+          - {os: windows-2022}
+          - {os: windows-latest}
+          - {os: windows-2019}
+          - {os: windows-2019}
+          
+
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      RSPM: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"
+      
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      # This is needed for workflows running on
+      # ubuntu-20.04 or later
+      - name: Install V8 
+        if: runner.os == 'Linux' && matrix.os != 'ubuntu-18.04'
+        run: |
+          sudo apt-get install -y libv8-dev
+          
+      # This is needed for workflows running on
+      # previous versions of ubuntu
+      - name: Install V8 on old ubuntu
+        if: runner.os == 'Linux' && matrix.os == 'ubuntu-18.04'
+        run: |
+          # Ubuntu Xenial (16.04) and Bionic (18.04) only
+          sudo add-apt-repository ppa:cran/v8
+          sudo apt-get update
+          sudo apt-get install libnode-dev
+
+      - name: Validate CITATION.cff
+        uses: dieghernan/cff-validator@main
+        
+      - name: Validate example/CITATION.cff
+        uses: dieghernan/cff-validator@main
+        with:
+          citation-path: "example/CITATION.cff"
