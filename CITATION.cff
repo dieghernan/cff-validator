@@ -9,7 +9,7 @@ authors:
 license: MIT
 repository-code: "https://github.com/dieghernan/cff-validator"
 keywords:
- - CITATION.cff
+ - "CITATION.cff"
  - cff
  - GitHub 
  - GitHub Action
