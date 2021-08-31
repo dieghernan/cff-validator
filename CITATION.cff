@@ -14,3 +14,5 @@ keywords:
   - citation files
   - GitHub Action
   - GitHub
+version: "v1"
+doi: 10.5281/zenodo.5348444
