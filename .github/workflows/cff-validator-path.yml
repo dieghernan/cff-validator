@@ -24,7 +24,12 @@ jobs:
         run: |
           sudo apt-get install -y libv8-dev
 
-      - name: Validate CITATION.cff
+      - name: Validate example/CITATION.cff
         uses: dieghernan/cff-validator@main
         with:
           citation-path: "example/CITATION.cff"
+          
+      - name: Validate example/CITATION_orig.cff
+        uses: dieghernan/cff-validator@main
+        with:
+          citation-path: "example/CITATION_orig.cff"
