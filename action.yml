@@ -1,8 +1,12 @@
-name: CITATION.cff validator
+name: cff-validator
+author: Diego Hernangómez
 description: "Validate your repository's CITATION.cff file using R software"
+branding:
+  icon: 'book-open'
+  color: 'gray-dark'
 inputs:
   citation-path:  
-    description: 'Path to CITATION.cff file. By default it select a CITATION.cff file on the root of the repository'
+    description: 'Path to .cff file to be validated. By default it selects a CITATION.cff file on the root of the repository.'
     required: false
     default: 'CITATION.cff'
 runs:
