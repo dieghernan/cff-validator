@@ -14,9 +14,8 @@ runs:
           install-r: false
         
       - name: Install V8 
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt-get install -y libv8-dev
+        run: ${{ !startsWith(os, 'Linux') }} || sudo apt-get install -y libv8-dev
+        shell: bash
         
       - name: Restore R package cache
         uses: actions/cache@v2.1.6
