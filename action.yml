@@ -13,10 +13,6 @@ runs:
         with:
           install-r: false
         
-      - name: Install V8 
-        run: ${{ !startsWith(os, 'Linux') }} || sudo apt-get install -y libv8-dev
-        shell: bash
-        
       - name: Restore R package cache
         uses: actions/cache@v2.1.6
         with:
