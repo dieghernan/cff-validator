@@ -1,12 +1,16 @@
 cff-version: 1.2.0
 message: "If you use this software in your research, please cite it as below."
 title: "cff-validator"
+version: "v1"
+doi: 10.5281/zenodo.5348444
+date-released: "2021-09-01"
 abstract: "A GitHub action to validate CITATION.cff files with R."
 authors:
 - family-names: "Hernangómez"
   given-names: "Diego"
   orcid: "https://orcid.org/0000-0001-8457-4658"
 license: MIT
+url: "https://github.com/marketplace/actions/cff-validator"
 repository-code: "https://github.com/dieghernan/cff-validator"
 keywords:
   - citation file format
@@ -14,5 +18,3 @@ keywords:
   - citation files
   - GitHub Action
   - GitHub
-version: "v1"
-doi: 10.5281/zenodo.5348444
