@@ -46,11 +46,11 @@ runs:
           result <- jsonvalidate::json_validate(cit_temp,
                             schema_temp,
                             verbose = TRUE)
-          message("\n\n-----")
+          message("------\n")
           if (result == FALSE){
-            stop(".cff file no valid",
-            "\n",
-            print(attributes(result)))
+          print(attributes(result))
+          message("\n")
+            stop(".cff file no valid")
           } else {
             message("${{ inputs.citation-path }} is valid")
           }
