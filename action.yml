@@ -50,7 +50,7 @@ runs:
           if (result == FALSE){
             stop(".cff file no valid",
             "\n",
-            attributes(result))
+            print(attributes(result)))
           } else {
             message("${{ inputs.citation-path }} is valid")
           }
