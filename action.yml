@@ -30,7 +30,7 @@ runs:
         
       - name: Validate cff
         run: |
-          citfile <- yaml::read_yaml("${{ inputs.who-to-greet }}")
+          citfile <- yaml::read_yaml("${{ inputs.citation-path }}")
           cit_temp <- tempfile(fileext = ".json")
           # Convert to json
           jsonlite::write_json(citfile, cit_temp, pretty = TRUE)
@@ -50,7 +50,7 @@ runs:
             print(result)
             stop(".cff file no valid")
           } else {
-            message("${{ inputs.who-to-greet }} is valid")
+            message("${{ inputs.citation-path }} is valid")
           }
         shell: Rscript {0}
         
