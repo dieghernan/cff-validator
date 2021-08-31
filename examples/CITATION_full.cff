@@ -1,10 +1,36 @@
-cff-version: 1.2.0
-message: "If you use CFF in your research, please cite it using these metadata."
 abstract: CITATION.cff files are plain text files with human- and machine-readable citation information for software. Code developers can include them in their repositories to let others know how to correctly cite their software. This is the specification for the Citation File Format.
 authors:
-  - family-names: Druskat
+  - address: "742 Evergreen Terrace"
+    affiliation: "German Aerospace Center (DLR)"
+    alias: sdruskat
+    city: Berlin
+    country: DE
+    email: sdruskat@research-project.org
+    family-names: Druskat
+    fax: +12-3456-7890
     given-names: Stephan
-    orcid: https://orcid.org/0000-0003-4925-7248
+    name-particle: von
+    name-suffix: III
+    orcid: "https://orcid.org/0000-0003-4925-7248"
+    post-code: 90210
+    region: Renfrewshire
+    tel: +12-345-6789098
+    website: "https://research-project.org"
+  - address: "742 Evergreen Terrace"
+    alias: sdruskat
+    city: Berlin
+    country: DE
+    date-end: "2021-07-27"
+    date-start: "2021-06-27"
+    email: sdruskat@research-project.org
+    fax: +12-3456-7890
+    location: "Lovelace Building, room 0.42"
+    name: von
+    orcid: "https://orcid.org/0000-0003-4925-7248"
+    post-code: "90210"
+    region: Renfrewshire
+    tel: +12-345-6789098
+    website: "https://research-project.org"
   - family-names: Spaaks
     given-names: Jurriaan H.
     orcid: https://orcid.org/0000-0002-7064-4069
@@ -31,18 +57,46 @@ authors:
   - family-names: Konovalov
     given-names: Alexander
     orcid: https://orcid.org/0000-0001-5299-3292
-title: Citation File Format
-version: 1.2.0
-identifiers:
-  - type: doi
-    value: 10.5281/zenodo.1003149
-    description: The concept DOI for the collection containing all versions of the Citation File Format.
-  - type: doi
-    value: 10.5281/zenodo.5171937
-    description: The versioned DOI for the version 1.2.0 of the Citation File Format.
+cff-version: 1.2.0
+commit: 1ff847d81f29c45a3a1a5ce73d38e45c2f319bba
+contact:
+  - affiliation: "German Aerospace Center (DLR)"
+    email: mail@research-project.org
+    family-names: Druskat
+    given-names: Stephan
 date-released: "2021-08-09"
-license: "CC-BY-4.0"
-doi: 10.5281/zenodo.5171937
+doi: 10.5281/zenodo.1003149
+identifiers:
+  - description: "The concept DOI of the work."
+    type: doi
+    value: 10.5281/zenodo.1003149
+  - description: "The versioned DOI for version 1.1.0 of the work."
+    type: doi
+    value: 10.5281/zenodo.4813122
+  - description: "The Software Heritage identifier for version 1.1.0 of the work."
+    type: swh
+    value: "swh:1:dir:bc286860f423ea7ced246ba7458eef4b4541cf2d"
+  - description: "The GitHub release URL of tag 1.1.0."
+    type: url
+    value: "https://github.com/citation-file-format/citation-file-format/releases/tag/1.1.0"
+  - description: "The GitHub release URL of the commit tagged with 1.1.0."
+    type: url
+    value: "https://github.com/citation-file-format/citation-file-format/tree/16192bf05e99bcb35d5c3e085047807b5720fafc"
+keywords:
+ - thefirstkeyword
+ - thesecondkeyword
+ - "a third keyword"
+license:
+ - GPL-3.0
+ - GPL-3.0-or-later
+message: "If you use this software, please cite it using the metadata from this file."
+preferred-citation:
+  authors:
+    - family-names: Famnames
+      given-names: "Given Nam E."
+  title: "Title of the work."
+  type: generic
+  year: 2021
 references:
   - authors:
       - family-names: Smith
@@ -100,3 +154,10 @@ references:
     type: proceedings
     volume: 27
     year: 2006
+repository: "https://ascl.net/2105.013"
+repository-artifact: "https://search.maven.org/artifact/org.corpus-tools/cff-maven-plugin/0.4.0/maven-plugin"
+repository-code: "https://github.com/citation-file-format/cff-converter-python"
+title: "cffconvert"
+type: dataset
+url: "https://citation-file-format.github.io/"
+version: "21.10 (Impish Indri)"
