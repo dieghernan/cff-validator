@@ -48,7 +48,7 @@ runs:
                             verbose = TRUE)
           message("\n\n-----")
           if (result == FALSE){
-            print(result)
+            print(attributes(result))
             stop(".cff file no valid")
           } else {
             message("${{ inputs.citation-path }} is valid")
