@@ -25,7 +25,7 @@ runs:
           if (isFALSE(requireNamespace("remotes", quietly = TRUE))) {
                     install.packages("remotes", dependencies = TRUE)
           }
-          remotes::install_cran(c("yaml","jsonlite", "jsonvalidate"), dependencies = TRUE)
+          remotes::install_cran(c("yaml","jsonlite", "jsonvalidate"), dependencies = TRUE, quiet = TRUE)
         shell: Rscript {0}
         
       - name: Validate cff
