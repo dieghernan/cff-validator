@@ -46,6 +46,7 @@ runs:
           result <- jsonvalidate::json_validate(cit_temp,
                             schema_temp,
                             verbose = TRUE)
+          message("\n\n-----")
           if (result == FALSE){
             print(result)
             stop(".cff file no valid")
