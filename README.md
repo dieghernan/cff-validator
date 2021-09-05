@@ -16,6 +16,7 @@ on:
   push:
     paths:
       - CITATION.cff
+  workflow_dispatch:
 
 name: CITATION.cff
 jobs:
