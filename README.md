@@ -14,9 +14,8 @@ A full valid workflow:
 ``` yaml
 on:
   push:
-    branches: [main, master]
-  pull_request:
-    branches: [main, master]
+    paths:
+      - CITATION.cff
 
 name: CITATION-cff
 jobs:
