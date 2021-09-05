@@ -17,7 +17,7 @@ on:
     paths:
       - CITATION.cff
 
-name: CITATION-cff
+name: CITATION.cff
 jobs:
   Validate-CITATION-cff:
     runs-on: ubuntu-latest
@@ -25,18 +25,17 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       RSPM: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"
-      
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        
+
       # This is needed for workflows running on
       # ubuntu-20.04 or later
-      - name: Install V8 
+      - name: Install V8
         if: runner.os == 'Linux'
         run: |
           sudo apt-get install -y libv8-dev
-
       - name: Validate CITATION.cff
         uses: dieghernan/cff-validator@v1
 ```

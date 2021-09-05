@@ -3,7 +3,7 @@ on:
     paths:
       - CITATION.cff
 
-name: CITATION-cff
+name: CITATION.cff
 jobs:
   Validate-CITATION-cff:
     runs-on: ubuntu-latest
@@ -22,6 +22,5 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get install -y libv8-dev
-
       - name: Validate CITATION.cff
         uses: dieghernan/cff-validator@v1
