@@ -1,12 +1,13 @@
 on:
   push:
     paths:
-      - CITATION.cff
+      - examples/key-complete/CITATION.cff
+      - action.yml
     workflow_dispatch:
 
-name: CITATION-cff path
+name: CITATION.cff-complete
 jobs:
-  Validate-CITATION-cff:
+  Validate-CITATION-cff-complete:
     runs-on: ubuntu-latest
     name: Validate CITATION.cff
     env:
@@ -24,12 +25,14 @@ jobs:
         run: |
           sudo apt-get install -y libv8-dev
 
-      - name: Validate examples/CITATION.cff
+      - name: Validate examples/key-complete/CITATION.cff
         uses: dieghernan/cff-validator@main
         with:
-          citation-path: "examples/CITATION.cff"
+          citation-path: "./examples/key-complete/CITATION.cff"
 
-      - name: Validate examples/CITATION_full.cff
-        uses: dieghernan/cff-validator@main
+      # Upload artifact
+      - uses: actions/upload-artifact@v2
+        if: failure()
         with:
-          citation-path: "examples/CITATION_full.cff"
+          name: citation-cff-errors
+          path: citation_cff_errors.md

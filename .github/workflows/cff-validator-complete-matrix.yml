@@ -2,6 +2,7 @@ on:
   push:
     paths:
       - CITATION.cff
+      - action.yml
     workflow_dispatch:
 
 # Run on available environments on GHA
@@ -58,7 +59,14 @@ jobs:
       - name: Validate CITATION.cff
         uses: dieghernan/cff-validator@main
 
-      - name: Validate examples/CITATION.cff
+      - name: Validate examples/key-complete/CITATION.cff
         uses: dieghernan/cff-validator@main
         with:
-          citation-path: "examples/CITATION.cff"
+          citation-path: "./examples/key-complete/CITATION.cff"
+
+      # Upload artifact
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: citation-cff-errors
+          path: citation_cff_errors.md
