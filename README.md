@@ -42,11 +42,33 @@ jobs:
 
 On error, the action shows the results of the validation highlighting the fields with errors.
 
+It also generates an [artifact](https://github.com/actions/upload-artifact) named
+`citation-cff-errors` that includes a 
+[markdown file](https://github.com/dieghernan/cff-validator/blob/main/examples/key-error/citation-cff-errors.md) with a 
+high-level summary of the errors found:
+
+```
+Table: ./examples/key-error/CITATION.cff errors:
+
+|field           |message                          |
+|:---------------|:--------------------------------|
+|data            |has additional properties        |
+|data.authors.0  |no schemas match                 |
+|data.doi        |referenced schema does not match |
+|data.keywords.0 |is the wrong type                |
+|data.license    |referenced schema does not match |
+|data.url        |referenced schema does not match |
+```
+
+
+
 For more examples, see the actions provided on [this path](https://github.com/dieghernan/cff-validator/tree/main/.github/workflows).
 
 ## Add a badge to your repo
 
-You can easily create a badge showing the current status of validation of your `CITATION.cff` like this: [![CITATION.cff](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator.yml/badge.svg)](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator.yml)
+You can easily create a badge showing the current status of validation of your `CITATION.cff` like this: 
+
+[![CITATION.cff](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator.yml/badge.svg)](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator.yml)
 
 [![CITATION-cff error](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator-error.yml/badge.svg)](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator-error.yml)
 
@@ -92,7 +114,7 @@ See a full featured implementation on [this example](https://github.com/dieghern
 
 This action runs a R script that can be easily replicated. See a full reprex:
 
-<details><summary>R script</summary>
+<details><summary><strong>R script</strong></summary>
 
 ``` r
 # Libraries
