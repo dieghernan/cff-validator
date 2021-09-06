@@ -1,6 +1,4 @@
-setwd("C:/Users/diego/Documents/R/Projects/cff-validator/examples/")
-
-citation_path <- "./key-error/CITATION.cff"
+citation_path <- ".examples/key-error/CITATION.cff"
 
 citfile <- yaml::read_yaml(citation_path)
 # All elements to character
