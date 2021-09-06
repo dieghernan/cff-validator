@@ -15,7 +15,7 @@ on:
   push:
     paths:
       - CITATION.cff
-  workflow_dispatch:
+    workflow_dispatch:
 
 name: CITATION.cff
 jobs:
@@ -38,15 +38,54 @@ jobs:
           sudo apt-get install -y libv8-dev
       - name: Validate CITATION.cff
         uses: dieghernan/cff-validator@main
+
+      # Upload artifact
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: citation-cff-errors
+          path: citation_cff_errors.md
 ```
 
 On error, the action shows the results of the validation highlighting the fields with errors.
 
+It also generates an [artifact](https://github.com/actions/upload-artifact) named
+`citation-cff-errors` that includes a 
+[markdown file](https://github.com/dieghernan/cff-validator/blob/main/examples/key-error/citation-cff-errors.md) with a 
+high-level summary of the errors found:
+
+```
+Table: ./examples/key-error/CITATION.cff errors:
+
+|field           |message                          |
+|:---------------|:--------------------------------|
+|data            |has additional properties        |
+|data.authors.0  |no schemas match                 |
+|data.doi        |referenced schema does not match |
+|data.keywords.0 |is the wrong type                |
+|data.license    |referenced schema does not match |
+|data.url        |referenced schema does not match |
+```
+
+
+
 For more examples, see the actions provided on [this path](https://github.com/dieghernan/cff-validator/tree/main/.github/workflows).
+
+## Add a badge to your repo
+
+You can easily create a badge showing the current status of validation of your `CITATION.cff` like this: 
+
+[![CITATION.cff](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator.yml/badge.svg)](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator.yml)
+
+[![CITATION-cff error](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator-error.yml/badge.svg)](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator-error.yml)
+
+See a quick demo:
+
+![](assets/demo.gif)
 
 ## Inputs available
 
--   `citation-path`: Path to .cff file to be validated. By default it selects a CITATION.cff file on the root of the repository:
+-   `citation-path`: Path to .cff file to be validated. By default it selects a `CITATION.cff` file on the root of the repository:
 
 ``` yaml
   - name: Validate CITATION.cff
@@ -82,15 +121,14 @@ See a full featured implementation on [this example](https://github.com/dieghern
 
 This action runs a R script that can be easily replicated. See a full reprex:
 
-<details><summary>R script</summary>
+<details><summary><strong>R script</strong></summary>
 
 ``` r
-# Libraries
-install.packages(c("yaml","jsonlite", "jsonvalidate"))
+# install_cran(c("yaml","jsonlite", "jsonvalidate", "knitr")
 
-cit_path <- "CITATION.cff"
+citation_path <- "./key-error/CITATION.cff"
 
-citfile <- yaml::read_yaml(cit_path)
+citfile <- yaml::read_yaml(citation_path)
 # All elements to character
 citfile <- rapply(citfile, function(x) as.character(x), how = "replace")
 
@@ -138,15 +176,38 @@ result <- jsonvalidate::json_validate(cit_temp,
 )
 # Results
 message("------\n")
-
+#> ------
 if (result == FALSE) {
-  print(attributes(result)$errors)
-  message("\n")
-  stop(cit_path, " file no valid")
+  print(knitr::kable(attributes(result)$errors,
+    align = "l",
+    caption = paste(citation_path, "errors:")
+  ))
+
+  message("\n\n------")
+  stop(citation_path, "file not valid. See Artifact: citation-cff-errors for details.")
 } else {
-  message(cit_path, " is valid")
+  message(citation_path, "is valid.")
+  message("\n\n------")
 }
+#> 
+#> 
+#> Table: ./key-error/CITATION.cff errors:
+#> 
+#> |field           |message                          |
+#> |:---------------|:--------------------------------|
+#> |data            |has additional properties        |
+#> |data.authors.0  |no schemas match                 |
+#> |data.doi        |referenced schema does not match |
+#> |data.keywords.0 |is the wrong type                |
+#> |data.license    |referenced schema does not match |
+#> |data.url        |referenced schema does not match |
+#> 
+#> 
+#> ------
+#> Error in eval(expr, envir, enclos): ./key-error/CITATION.cfffile not valid. See Artifact: citation-cff-errors for details.
 ```
+
+<sup>Created on 2021-09-06 by the [reprex package](https://reprex.tidyverse.org) (v2.0.1)</sup>
 
 </details>
 

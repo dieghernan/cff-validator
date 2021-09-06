@@ -8,3 +8,12 @@ authors:
   orcid: "https://orcid.org/ 0000-0001-8457-4658"
   error: yes
 - name: The Research Software project
+error_field: This is an error
+doi: https://doi.org/10.5281/zenodo.4442958
+url: 123456
+license: abcdef
+keywords:
+- family-names: "Hernangómez"
+  given-names: "Diego"
+  orcid: "https://orcid.org/ 0000-0001-8457-4658"
+  error: yes

@@ -1,9 +1,13 @@
 on:
-  workflow_dispatch:
+  push:
+    paths:
+      - examples/key-error/CITATION.cff
+      - action.yml
+    workflow_dispatch:
 
-name: CITATION-cff error
+name: CITATION.cff-error
 jobs:
-  Validate-CITATION-cff:
+  Validate-CITATION-cff-error:
     runs-on: ubuntu-latest
     name: Validate CITATION.cff
     env:
@@ -21,7 +25,14 @@ jobs:
         run: |
           sudo apt-get install -y libv8-dev
 
-      - name: Validate examples/CITATION_error.cff
+      - name: Validate examples/key-error/CITATION.cff
         uses: dieghernan/cff-validator@main
         with:
-          citation-path: "examples/CITATION_error.cff"
+          citation-path: "./examples/key-error/CITATION.cff"
+
+      # Upload artifact
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: citation-cff-errors
+          path: citation_cff_errors.md
