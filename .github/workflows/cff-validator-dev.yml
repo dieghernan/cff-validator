@@ -39,5 +39,3 @@ jobs:
         with:
           name: citation-cff-errors
           path: citation_cff_errors.md
-          if-no-files-found: ignore
-

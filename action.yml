@@ -83,15 +83,16 @@ runs:
           # Results
           message("------\n")
           if (result == FALSE){
-            print(knitr::kable(attributes(result)$errors, align = "l", caption = "See errors"))
+            print(knitr::kable(attributes(result)$errors, align = "l", caption = paste("${{ inputs.citation-path }}", "errors:")))
               writeLines(knitr::kable(attributes(result)$errors,
                           align = "l",
-                          caption = "See errors"
+                          caption = paste("${{ inputs.citation-path }}", "errors:")
                           ),
                           con = "citation_cff_errors.md")
           message("\n\n------")
-            stop("${{ inputs.citation-path }} file not valid")
+            stop("${{ inputs.citation-path }} file not valid. See Artifact: citation-cff-errors for details.")
           } else {
-            message("${{ inputs.citation-path }} is valid")
+            message("${{ inputs.citation-path }} is valid.")
+            message("\n\n------")
           }
         shell: Rscript {0}
