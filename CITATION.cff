@@ -22,7 +22,6 @@ keywords:
 references:
   - title: Citation File Format
     abstract: CITATION.cff files are plain text files with human- and machine-readable citation information for software. Code developers can include them in their repositories to let others know how to correctly cite their software. This is the specification for the Citation File Format.
-
     version: 1.2.0
     type: software
     authors:
