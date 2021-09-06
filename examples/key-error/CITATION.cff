@@ -6,13 +6,13 @@ authors:
 - family-names: "Hernangómez"
   given-names: "Diego"
   orcid: "https://orcid.org/ 0000-0001-8457-4658"
-  error: yes
+  error: yes # This key is an error on author
 - name: The Research Software project
-error_field: This is an error
-doi: https://doi.org/10.5281/zenodo.4442958
-url: 123456
-license: abcdef
-keywords:
+error_field: This is an error # This key is an error on the schema
+doi: https://doi.org/10.5281/zenodo.4442958 # doi with wrong format, shouldn’t be an url
+url: 123456 # url not valid
+license: abcdef # license not in schema
+keywords: # Error, person as keyword
 - family-names: "Hernangómez"
   given-names: "Diego"
   orcid: "https://orcid.org/ 0000-0001-8457-4658"
