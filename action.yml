@@ -84,9 +84,22 @@ runs:
           message("------\n")
           if (result == FALSE){
             print(knitr::kable(attributes(result)$errors, align = "l", caption = "See errors"))
-          message("\n")
+              writeLines(knitr::kable(attributes(result)$errors,
+                          align = "l",
+                          caption = "See errors"
+                          ),
+                          con = "citation_cff_errors.md")
+          message("\n\n------")
             stop("${{ inputs.citation-path }} file not valid")
           } else {
             message("${{ inputs.citation-path }} is valid")
           }
         shell: Rscript {0}
+
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: citation-cff-errors
+          path: citation_cff_errors.md
+          if-no-files-found: ignore
