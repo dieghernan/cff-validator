@@ -29,10 +29,10 @@ jobs:
         with:
           citation-path: "examples/CITATION_full.cff"
         
-      - name: Validate examples/CITATION_error.cff
-        uses: dieghernan/cff-validator@dev
-        with:
-          citation-path: "examples/CITATION_error.cff"
+      #- name: Validate examples/CITATION_error.cff
+      #  uses: dieghernan/cff-validator@dev
+      #  with:
+      #    citation-path: "examples/CITATION_error.cff"
           
       - uses: actions/upload-artifact@v2
         if: failure()
