@@ -46,9 +46,7 @@ For more examples, see the actions provided on [this path](https://github.com/di
 
 ## Add a badge to your repo
 
-You can easily create a badge showing the current status of validation
-of your `CITATION.cff` like this:
-[![CITATION.cff](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator.yml/badge.svg)](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator.yml)
+You can easily create a badge showing the current status of validation of your `CITATION.cff` like this: [![CITATION.cff](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator.yml/badge.svg)](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator.yml)
 
 [![CITATION-cff error](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator-error.yml/badge.svg)](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator-error.yml)
 
