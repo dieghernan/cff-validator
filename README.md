@@ -55,7 +55,7 @@ It also generates an [artifact](https://github.com/actions/upload-artifact) name
 high-level summary of the errors found:
 
 ```
-Table: ./examples/key-error/CITATION.cff errors:
+Table: **./examples/key-error/CITATION.cff errors:**
 
 |field           |message                          |
 |:---------------|:--------------------------------|
@@ -65,6 +65,7 @@ Table: ./examples/key-error/CITATION.cff errors:
 |data.keywords.0 |is the wrong type                |
 |data.license    |referenced schema does not match |
 |data.url        |referenced schema does not match |
+
 ```
 
 

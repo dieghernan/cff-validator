@@ -1,4 +1,4 @@
-Table: ./examples/key-error/CITATION.cff errors:
+Table: **./examples/key-error/CITATION.cff errors:**
 
 |field           |message                          |
 |:---------------|:--------------------------------|
