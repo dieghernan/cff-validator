@@ -44,9 +44,21 @@ On error, the action shows the results of the validation highlighting the fields
 
 For more examples, see the actions provided on [this path](https://github.com/dieghernan/cff-validator/tree/main/.github/workflows).
 
+## Add a badge to your repo
+
+You can easily create a badge showing the current status of validation
+of your `CITATION.cff` like this:
+[![CITATION.cff](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator.yml/badge.svg)](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator.yml)
+
+[![CITATION-cff error](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator-error.yml/badge.svg)](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator-error.yml)
+
+See a quick demo:
+
+![](assets/demo.gif)
+
 ## Inputs available
 
--   `citation-path`: Path to .cff file to be validated. By default it selects a CITATION.cff file on the root of the repository:
+-   `citation-path`: Path to .cff file to be validated. By default it selects a `CITATION.cff` file on the root of the repository:
 
 ``` yaml
   - name: Validate CITATION.cff
