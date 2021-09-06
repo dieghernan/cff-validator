@@ -95,10 +95,3 @@ runs:
             message("${{ inputs.citation-path }} is valid")
           }
         shell: Rscript {0}
-
-
-      - uses: actions/upload-artifact@v2
-        with:
-          name: citation-cff-errors
-          path: citation_cff_errors.md
-          if-no-files-found: ignore

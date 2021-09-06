@@ -33,3 +33,10 @@ jobs:
         uses: dieghernan/cff-validator@dev
         with:
           citation-path: "examples/CITATION_error.cff"
+          
+      - uses: actions/upload-artifact@v2
+        with:
+          name: citation-cff-errors
+          path: citation_cff_errors.md
+          if-no-files-found: ignore
+
