@@ -85,7 +85,7 @@ runs:
           if (result == FALSE){
           print(attributes(result)$errors)
           message("\n")
-            stop("${{ inputs.citation-path }} file no valid")
+            stop("${{ inputs.citation-path }} file not valid")
           } else {
             message("${{ inputs.citation-path }} is valid")
           }
