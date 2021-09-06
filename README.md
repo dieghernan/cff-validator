@@ -51,7 +51,7 @@ On error, the action shows the results of the validation highlighting the fields
 
 It also generates an [artifact](https://github.com/actions/upload-artifact) named
 `citation-cff-errors` that includes a 
-[markdown file](https://github.com/dieghernan/cff-validator/blob/main/examples/key-error/citation-cff-errors.md) with a 
+[markdown file](https://github.com/dieghernan/cff-validator/blob/main/examples/key-error/citation_cff_errors.md) with a 
 high-level summary of the errors found:
 
 ```
@@ -115,7 +115,7 @@ This action relies on the R package `V8`, that has some extra requirements when 
           sudo apt-get install libnode-dev
 ```
 
-See a full featured implementation on [this example](https://github.com/dieghernan/cff-validator/blob/main/.github/workflows/cff-validator-full-matrix.yml).
+See a full featured implementation on [this example](https://github.com/dieghernan/cff-validator/blob/main/.github/workflows/cff-validator-complete-matrix.yml).
 
 ## Under the hood (for useRs)
 

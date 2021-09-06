@@ -86,7 +86,7 @@ runs:
             print(knitr::kable(attributes(result)$errors, align = "l", caption = paste("${{ inputs.citation-path }}", "errors:")))
               writeLines(knitr::kable(attributes(result)$errors,
                           align = "l",
-                          caption = paste("${{ inputs.citation-path }}", "errors:")
+                          caption = paste("**${{ inputs.citation-path }}", "errors:**")
                           ),
                           con = "citation_cff_errors.md")
           message("\n\n------")
