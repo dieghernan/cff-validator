@@ -54,7 +54,7 @@ It also generates an [artifact](https://github.com/actions/upload-artifact) name
 [markdown file](https://github.com/dieghernan/cff-validator/blob/main/examples/key-error/citation_cff_errors.md) with a 
 high-level summary of the errors found:
 
-```
+<details><summary><strong>citation_cff_errors.md</strong></summary>
 Table: **./examples/key-error/CITATION.cff errors:**
 
 |field           |message                          |
@@ -66,7 +66,10 @@ Table: **./examples/key-error/CITATION.cff errors:**
 |data.license    |referenced schema does not match |
 |data.url        |referenced schema does not match |
 
-```
+
+See [Guide to Citation File Format schema version 1.2.0](https://github.com/citation-file-format/citation-file-format/blob/main/schema-guide.md) for debugging.
+
+</details>
 
 
 
