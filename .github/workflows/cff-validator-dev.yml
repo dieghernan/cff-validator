@@ -24,15 +24,15 @@ jobs:
         run: |
           sudo apt-get install -y libv8-dev
           
-      - name: Validate CITATION_full.cff
+      - name: Validate /examples/key-complete/CITATION.cff
         uses: dieghernan/cff-validator@dev
         with:
-          citation-path: "examples/CITATION_full.cff"
+          citation-path: "/examples/key-complete/CITATION.cff"
         
-      #- name: Validate examples/CITATION_error.cff
-      #  uses: dieghernan/cff-validator@dev
-      #  with:
-      #    citation-path: "examples/CITATION_error.cff"
+      - name: Validate /examples/key-error/CITATION.cff
+        uses: dieghernan/cff-validator@dev
+        with:
+          citation-path: "/examples/key-error/CITATION.cff"
           
       - uses: actions/upload-artifact@v2
         if: failure()
