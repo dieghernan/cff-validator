@@ -35,6 +35,7 @@ jobs:
           citation-path: "examples/CITATION_error.cff"
           
       - uses: actions/upload-artifact@v2
+        if: failure()
         with:
           name: citation-cff-errors
           path: citation_cff_errors.md
