@@ -84,12 +84,17 @@ runs:
           message("------\n")
           if (result == FALSE){
             print(knitr::kable(attributes(result)$errors, align = "l", caption = paste("${{ inputs.citation-path }}", "errors:")))
-              writeLines(knitr::kable(attributes(result)$errors,
+            message("\n\n------")
+            writeLines(knitr::kable(attributes(result)$errors,
                           align = "l",
                           caption = paste("**${{ inputs.citation-path }}", "errors:**")
                           ),
                           con = "citation_cff_errors.md")
-          message("\n\n------")
+                          
+                          
+            write("\n\nSee [Guide to Citation File Format schema version 1.2.0](https://github.com/citation-file-format/citation-file-format/blob/main/schema-guide.md) for debugging.",
+            file = "citation_cff_errors.md",
+            append = TRUE)
             stop("${{ inputs.citation-path }} file not valid. See Artifact: citation-cff-errors for details.")
           } else {
             message("${{ inputs.citation-path }} is valid.")
