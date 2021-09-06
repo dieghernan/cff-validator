@@ -1,9 +1,8 @@
 # cff-validator
 
-![latest-version](https://img.shields.io/github/v/release/dieghernan/cff-validator) [![CITATION-cff](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator.yml/badge.svg)](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator.yml)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5348444.svg)](https://doi.org/10.5281/zenodo.5348444)
+![latest-version](https://img.shields.io/github/v/release/dieghernan/cff-validator) [![CITATION-cff](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator.yml/badge.svg)](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator.yml) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5348444.svg)](https://doi.org/10.5281/zenodo.5348444)
 
-A GitHub action to validate CITATION.cff files with R.
+A GitHub action to validate `CITATION.cff` files with R.
 
 ## Introduction
 
@@ -38,7 +37,7 @@ jobs:
         run: |
           sudo apt-get install -y libv8-dev
       - name: Validate CITATION.cff
-        uses: dieghernan/cff-validator@v1
+        uses: dieghernan/cff-validator@main
 ```
 
 On error, the action shows the results of the validation highlighting the fields with errors.
@@ -51,7 +50,7 @@ For more examples, see the actions provided on [this path](https://github.com/di
 
 ``` yaml
   - name: Validate CITATION.cff
-    uses: dieghernan/cff-validator@v1
+    uses: dieghernan/cff-validator@main
     with:
       citation-path: "examples/CITATION.cff"
 ```
@@ -150,3 +149,7 @@ if (result == FALSE) {
 ```
 
 </details>
+
+## References
+
+Druskat, S., Spaaks, J. H., Chue Hong, N., Haines, R., Baker, J., Bliven, S., Willighagen, E., Pérez-Suárez, D., & Konovalov, A. (2021). Citation File Format (Version 1.2.0) [Computer software]. <https://doi.org/10.5281/zenodo.5171937>
