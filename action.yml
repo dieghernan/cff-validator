@@ -20,13 +20,22 @@ runs:
         uses: r-lib/actions/setup-r@v2
         with:
           install-r: true
-
+          
+      - name: Query dependencies
+        id: install
+        run: |
+          # Dependency resolution
+          cat("os-version=", sessionInfo()$running, "\n", file = Sys.getenv("GITHUB_OUTPUT"), sep = "", append = TRUE)
+          cat("r-version=", if (grepl("development", rv <- R.Version()$version.string)) as.character(getRversion()) else rv, "\n", file = Sys.getenv("GITHUB_OUTPUT"), sep = "", append = TRUE)
+        shell: Rscript {0}
+          
       - name: Restore R package cache
         uses: actions/cache@v3
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ inputs.cache-version }}-cff
-          restore-keys: ${{ runner.os }}-${{ inputs.cache-version }}-cff
+          key: ${{ steps.install.outputs.os-version }}-${{ steps.install.outputs.r-version }}-${{inputs.cache-version }}-cff
+          restore-keys: ${{ env.R_LIBS_USER }}
+          key: ${{ steps.install.outputs.os-version }}-${{ steps.install.outputs.r-version }}-${{inputs.cache-version }}-cff
 
       - name: Install pak
         run: |
@@ -40,7 +49,6 @@ runs:
         run: |
           # Install dependencies
           cat("::group::Install/update packages\n")
-          cat("os-version=", sessionInfo()$running, "\n")
           # Install/Update packages
           Sys.setenv("PKGCACHE_HTTP_VERSION" = "2")
           pak::pkg_install(c("cffr", "knitr", "sessioninfo"), upgrade = TRUE, dependencies = TRUE)
