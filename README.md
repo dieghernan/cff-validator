@@ -32,12 +32,6 @@ jobs:
       - name: Validate CITATION.cff
         uses: dieghernan/cff-validator@main
 
-      # Upload artifact
-      - uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: citation-cff-errors
-          path: citation_cff_errors.md
 
 ```
 

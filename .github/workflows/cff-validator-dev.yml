@@ -33,8 +33,3 @@ jobs:
         with:
           citation-path: "./examples/key-error/CITATION.cff"
           
-      - uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: citation-cff-errors
-          path: citation_cff_errors.md
