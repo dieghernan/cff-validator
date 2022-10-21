@@ -1,8 +1,5 @@
 on:
   push:
-    paths:
-      - CITATION.cff
-      - action.yml
   workflow_dispatch:
 
 # Run on available environments on GHA
@@ -42,10 +39,3 @@ jobs:
           citation-path: "./examples/key-complete/CITATION.cff"
           cache-version: 3
           
-        # Upload artifact
-      - uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: citation-cff-errors
-          path: citation_cff_errors.md
-

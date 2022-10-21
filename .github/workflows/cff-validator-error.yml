@@ -1,8 +1,5 @@
 on:
   push:
-    paths:
-      - examples/key-error/CITATION.cff
-      - action.yml
   workflow_dispatch:
 
 name: CITATION.cff-error
