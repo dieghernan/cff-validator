@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 
 # Run on available environments on GHA
-# as on 2020-08-30
+# as on 2022-10-21
 
 name: CITATION-cff full matrix
 jobs:
@@ -19,6 +19,16 @@ jobs:
           - {os: ubuntu-latest}
           - {os: macos-latest}
           - {os: windows-latest}
+          
+          - {os: windows-2019}
+          - {os: ubuntu-22.04}
+          - {os: ubuntu-18.04}
+          - {os: macos-12}
+          - {os: macos-10.15}
+          
+          
+          
+          
 
 
     env:
