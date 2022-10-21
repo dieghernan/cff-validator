@@ -34,8 +34,7 @@ runs:
         with:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ steps.install.outputs.os-version }}-${{ steps.install.outputs.r-version }}-${{inputs.cache-version }}-cff
-          restore-keys: ${{ env.R_LIBS_USER }}
-          key: ${{ steps.install.outputs.os-version }}-${{ steps.install.outputs.r-version }}-${{inputs.cache-version }}-cff
+          restore-keys: ${{ steps.install.outputs.os-version }}-${{ steps.install.outputs.r-version }}-${{inputs.cache-version }}-cff
 
       - name: Install pak
         run: |
