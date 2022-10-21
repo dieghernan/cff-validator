@@ -26,40 +26,26 @@ jobs:
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      RSPM: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      # This is needed for workflows running on
-      # ubuntu-20.04 or later
-      - name: Install V8
-        if: runner.os == 'Linux' && matrix.config.os != 'ubuntu-18.04'
-        run: |
-          sudo apt-get install -y libv8-dev
-
-      # This is needed for workflows running on
-      # previous versions of ubuntu
-      - name: Install V8 on old ubuntu
-        if: runner.os == 'Linux' && matrix.config.os == 'ubuntu-18.04'
-        run: |
-          # Ubuntu Xenial (16.04) and Bionic (18.04) only
-          sudo add-apt-repository ppa:cran/v8
-          sudo apt-get update
-          sudo apt-get install libnode-dev
-
       - name: Validate CITATION.cff
         uses: dieghernan/cff-validator@main
+        with:
+          cache-version: 3
 
       - name: Validate examples/key-complete/CITATION.cff
         uses: dieghernan/cff-validator@main
         with:
           citation-path: "./examples/key-complete/CITATION.cff"
-
-      # Upload artifact
+          cache-version: 3
+          
+        # Upload artifact
       - uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: citation-cff-errors
           path: citation_cff_errors.md
+

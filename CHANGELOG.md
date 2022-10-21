@@ -1,3 +1,8 @@
+# dev
+
+- New `cache-version` parameter.
+- Better handling of R packages.
+
 # v2
 
 - Pretty printing of errors.
