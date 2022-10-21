@@ -137,3 +137,11 @@ runs:
           }
         shell: Rscript {0}
         
+        # Upload artifact
+      - uses: actions/upload-artifact@v2
+        name: Upload error report
+        if: failure()
+        with:
+          name: citation-cff-errors
+          path: citation_cff_errors.md
+        
