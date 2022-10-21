@@ -9,31 +9,65 @@ inputs:
     description: 'Path to .cff file to be validated. By default it selects a CITATION.cff file on the root of the repository.'
     required: false
     default: 'CITATION.cff'
+  cache-version:
+    description: 'The version of the cache, change this from the default (1) to start over with a fresh cache.'
+    required: false
+    default: 1
 runs:
   using: composite
   steps:
       - name: Install R
         uses: r-lib/actions/setup-r@v2
         with:
-          install-r: false
+          install-r: true
 
       - name: Restore R package cache
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v3
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-${{ inputs.cache-version }}-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-${{ inputs.cache-version }}-
 
-      - name: Install packages
+      - name: Install pak
         run: |
-          if (isFALSE(requireNamespace("remotes", quietly = TRUE))) {
-                    install.packages("remotes", dependencies = TRUE)
-          }
-          remotes::install_cran(c("yaml","jsonlite", "jsonvalidate", "knitr"), dependencies = TRUE, quiet = TRUE)
+          # Install pak
+          cat("::group::Install pak\n")
+          install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
+          cat("::endgroup::\n")
+        shell: Rscript {0}
+        
+      - name: Install dependencies
+        run: |
+          # Install dependencies
+          cat("::group::Install/update packages\n")
+          cat("os-version=", sessionInfo()$running, "\n")
+          # Install/Update packages
+          Sys.setenv("PKGCACHE_HTTP_VERSION" = "2")
+          pak::pkg_install(c("cffr", "knitr", "sessioninfo"), upgrade = TRUE, dependencies = TRUE)
+          cat("::endgroup::\n")
         shell: Rscript {0}
 
-      - name: Validate cff
+      - name: Session info
         run: |
+          # Session info
+          cat("::group::Session info\n")
+          if (requireNamespace("sessioninfo", quietly = TRUE)) {
+            if (packageVersion("sessioninfo") >= "1.2.1") {
+              sessioninfo::session_info(pkgs = "installed", include_base = TRUE)
+            } else {
+              options(width = 200)
+              sessioninfo::session_info(rownames(installed.packages()), include_base=TRUE)
+            }
+          } else {
+            sessionInfo()
+          }
+          cat("::endgroup::\n")
+        shell: Rscript {0}
+
+
+      - name: Validate cff
+        run: | 
+          # Validate cff
           citfile <- yaml::read_yaml("${{ inputs.citation-path }}")
           # All elements to character
           citfile <- rapply(citfile, function(x) as.character(x), how = "replace")
@@ -81,6 +115,7 @@ runs:
                                                 verbose = TRUE
           )
           # Results
+          cat("Results\n")
           message("------\n")
           if (result == FALSE){
             print(knitr::kable(attributes(result)$errors, align = "l", caption = paste("${{ inputs.citation-path }}", "errors:")))
@@ -101,3 +136,11 @@ runs:
             message("\n\n------")
           }
         shell: Rscript {0}
+        
+      # Upload artifact
+      - uses: actions/upload-artifact@v2
+        name: Uploading Error report
+        if: failure()
+        with:
+          name: citation-cff-errors
+          path: citation_cff_errors.md

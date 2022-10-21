@@ -20,31 +20,19 @@ on:
 name: CITATION.cff
 jobs:
   Validate-CITATION-cff:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     name: Validate CITATION.cff
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      RSPM: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      # This is needed for workflows running on
-      # ubuntu-20.04 or later
-      - name: Install V8
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt-get install -y libv8-dev
       - name: Validate CITATION.cff
         uses: dieghernan/cff-validator@main
 
-      # Upload artifact
-      - uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: citation-cff-errors
-          path: citation_cff_errors.md
+
 ```
 
 On error, the action shows the results of the validation highlighting the fields with errors.
@@ -98,26 +86,8 @@ See a quick demo:
       citation-path: "examples/CITATION.cff"
 ```
 
-## Building on Linux
+-   `cache-version`: default 1. If you need to invalidate the existing cache pass any other number and a new cache will be used.
 
-This action relies on the R package `V8`, that has some extra requirements when running on Linux systems. You would need to add the following steps to your action in order to make it run:
-
-``` yaml
-      # This is needed for workflows running on
-      # ubuntu-20.04 or later
-      - name: Install V8 
-        run: |
-          sudo apt-get install -y libv8-dev
-          
-      # This is needed for workflows running on
-      # previous versions of ubuntu
-      - name: Install V8 on old ubuntu
-        run: |
-          # Ubuntu Xenial (16.04) and Bionic (18.04) only
-          sudo add-apt-repository ppa:cran/v8
-          sudo apt-get update
-          sudo apt-get install libnode-dev
-```
 
 See a full featured implementation on [this example](https://github.com/dieghernan/cff-validator/blob/main/.github/workflows/cff-validator-complete-matrix.yml).
 
