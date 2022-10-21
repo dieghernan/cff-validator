@@ -3,7 +3,7 @@ on:
     paths:
       - examples/key-error/CITATION.cff
       - action.yml
-    workflow_dispatch:
+  workflow_dispatch:
 
 name: CITATION.cff-error
 jobs:

@@ -2,7 +2,7 @@ on:
   push:
     branches:
       - dev
-    workflow_dispatch:
+  workflow_dispatch:
 
 name: dev CITATION.cff
 jobs:
