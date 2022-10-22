@@ -130,12 +130,12 @@ runs:
             
             writeLines("\n:x: `${{ inputs.citation-path }}` has errors",
               con = "citation_cff_errors.md")
-            writeLines(knitr::kable(attributes(result)$errors,
+            write(knitr::kable(attributes(result)$errors,
                           align = "l",
                           caption = paste("**${{ inputs.citation-path }}", "errors:**")
                           ),
                           file = "citation_cff_errors.md",
-            append = TRUE)
+                          append = TRUE)
                           
                           
             write("\n\nSee [Guide to Citation File Format schema version 1.2.0](https://github.com/citation-file-format/citation-file-format/blob/main/schema-guide.md) for debugging.",
@@ -151,6 +151,7 @@ runs:
         shell: bash
         if: success()
         run: |
+          # OK :)
           echo "" >> $GITHUB_STEP_SUMMARY # this is a blank line
           echo ":white_check_mark: Congratulations! `${{ inputs.citation-path }}` is valid" >> $GITHUB_STEP_SUMMARY
         
@@ -159,5 +160,6 @@ runs:
         if: failure()
         shell: bash
         run: |
+          # Not OK :( See summary
           cat citation_cff_errors.md >$GITHUB_STEP_SUMMARY
         
