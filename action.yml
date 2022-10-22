@@ -13,6 +13,8 @@ inputs:
     description: 'The version of the cache, change this from the default (1) to start over with a fresh cache.'
     required: false
     default: 1
+# pak cache management derived from https://github.com/r-lib/actions/blob/v2-branch/setup-r-dependencies/action.yaml 
+# By Jim Hester
 runs:
   using: composite
   steps:
