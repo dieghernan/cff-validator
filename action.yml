@@ -154,13 +154,12 @@ runs:
         if: success()
         run: |
           echo "" >> $GITHUB_STEP_SUMMARY # this is a blank line
-          echo "Congratulations ${{ inputs.citation-path }} is valid :white_check_mark:" >> $GITHUB_STEP_SUMMARY
+          echo "Congratulations! ${{ inputs.citation-path }} is valid :white_check_mark:" >> $GITHUB_STEP_SUMMARY
         
         # Upload artifact
-      - uses: actions/upload-artifact@v2
-        name: Upload error report
+      - name: Upload error report
         if: failure()
-        with:
-          name: citation-cff-errors
-          path: citation_cff_errors.md
+        shell: bash
+        run: |
+          cat citation_cff_errors.md >$GITHUB_STEP_SUMMARY
         
