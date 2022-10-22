@@ -50,7 +50,7 @@ runs:
           cat("::group::Install/update packages\n")
           # Install/Update packages
           Sys.setenv("PKGCACHE_HTTP_VERSION" = "2")
-          pak::pkg_install(c("cffr", "knitr", "sessioninfo"), upgrade = TRUE, dependencies = TRUE)
+          pak::pkg_install(c("yaml", "jsonlite", "knitr", "jsonvalidate", "sessioninfo"), upgrade = TRUE, dependencies = FALSE)
           cat("::endgroup::\n")
         shell: Rscript {0}
 
