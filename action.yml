@@ -78,7 +78,7 @@ runs:
       - name: Validate cff
         run: | 
           # Validate cff
-          cat("Validate cff\n")
+          cat("Validating cff\n")
           citfile <- yaml::read_yaml("${{ inputs.citation-path }}")
           # All elements to character
           citfile <- rapply(citfile, function(x) as.character(x), how = "replace")
@@ -126,25 +126,23 @@ runs:
                                                 verbose = TRUE
           )
           # Results
-          message("------\n")
           if (result == FALSE){
-            print(knitr::kable(attributes(result)$errors, align = "l", caption = paste("${{ inputs.citation-path }}", "errors:")))
-            message("\n\n------")
+            
+            writeLines("\n:x: `${{ inputs.citation-path }}` has errors",
+              con = "citation_cff_errors.md")
             writeLines(knitr::kable(attributes(result)$errors,
                           align = "l",
                           caption = paste("**${{ inputs.citation-path }}", "errors:**")
                           ),
-                          con = "citation_cff_errors.md")
+                          file = "citation_cff_errors.md",
+            append = TRUE)
                           
                           
             write("\n\nSee [Guide to Citation File Format schema version 1.2.0](https://github.com/citation-file-format/citation-file-format/blob/main/schema-guide.md) for debugging.",
             file = "citation_cff_errors.md",
             append = TRUE)
             stop("${{ inputs.citation-path }} file not valid. See Artifact: citation-cff-errors for details.")
-          } else {
-            message("${{ inputs.citation-path }} is valid.")
-            message("\n\n------")
-          }
+          } 
         shell: Rscript {0}
         
         
@@ -161,7 +159,5 @@ runs:
         if: failure()
         shell: bash
         run: |
-          echo "" >> $GITHUB_STEP_SUMMARY # this is a blank line
-          echo ":x: `${{ inputs.citation-path }}` has errors" >> $GITHUB_STEP_SUMMARY
           cat citation_cff_errors.md >$GITHUB_STEP_SUMMARY
         
