@@ -131,8 +131,7 @@ runs:
             writeLines("\n:x: `${{ inputs.citation-path }}` has errors",
               con = "citation_cff_errors.md")
             write(knitr::kable(attributes(result)$errors,
-                          align = "l",
-                          caption = paste("**${{ inputs.citation-path }}", "errors:**")
+                          align = "l"
                           ),
                           file = "citation_cff_errors.md",
                           append = TRUE)
@@ -142,7 +141,12 @@ runs:
             file = "citation_cff_errors.md",
             append = TRUE)
             stop("${{ inputs.citation-path }} file not valid. See Artifact: citation-cff-errors for details.")
-          } 
+          } else {
+           
+           writeLines(":white_check_mark: Congratulations! `${{ inputs.citation-path }}` is valid",
+              con = "citation_cff_ok.md")
+          
+          }
         shell: Rscript {0}
         
         
@@ -152,8 +156,7 @@ runs:
         if: success()
         run: |
           # OK :)
-          echo "" >> $GITHUB_STEP_SUMMARY # this is a blank line
-          echo ":white_check_mark: Congratulations! `${{ inputs.citation-path }}` is valid" >> $GITHUB_STEP_SUMMARY
+          cat citation_cff_ok.md >$GITHUB_STEP_SUMMARY
         
         # Upload artifact
       - name: Upload error report

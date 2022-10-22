@@ -35,12 +35,7 @@ jobs:
 
 ```
 
-On error, the action shows the results of the validation highlighting the fields with errors.
-
-It also generates an [artifact](https://github.com/actions/upload-artifact) named
-`citation-cff-errors` that includes a 
-[markdown file](https://github.com/dieghernan/cff-validator/blob/main/examples/key-error/citation_cff_errors.md) with a 
-high-level summary of the errors found:
+On error, the action produces a Job Summary with a high-level description of the errors found:
 
 <details><summary><strong>citation_cff_errors.md</strong></summary>
 Table: **./examples/key-error/CITATION.cff errors:**

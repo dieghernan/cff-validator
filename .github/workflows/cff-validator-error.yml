@@ -5,17 +5,8 @@ on:
 name: CITATION.cff-error
 jobs:
   Validate-CITATION-cff-error:
-    runs-on: ${{ matrix.config.os }}
-    name: ${{ matrix.config.os }}
-
-    strategy:
-      fail-fast: false
-      matrix:
-        config:
-          - {os: ubuntu-latest}
-          - {os: macos-latest}
-          - {os: windows-latest}
-    
+    runs-on: ubuntu-latest
+    name: Validate CITATION.cff with errors
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
