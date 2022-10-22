@@ -1,9 +1,9 @@
 cff-version: 1.2.0
 message: "If you use this software in your research, please cite it as below."
 title: "cff-validator"
-version: "v1"
-doi: 10.5281/zenodo.5348444
-date-released: "2021-09-01"
+version: "v2.1"
+doi: 10.5281/zenodo.5348443
+date-released: "2022-10-22"
 abstract: "A GitHub action to validate CITATION.cff files with R."
 authors:
 - family-names: "Hernangómez"
