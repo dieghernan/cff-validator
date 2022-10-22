@@ -18,5 +18,3 @@ jobs:
 
       - name: Validate CITATION.cff
         uses: dieghernan/cff-validator@main
-        with:
-          cache-version: 2
