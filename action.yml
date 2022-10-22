@@ -52,6 +52,7 @@ runs:
           # Install/Update packages
           Sys.setenv("PKGCACHE_HTTP_VERSION" = "2")
           pak::pkg_install(c("yaml", "jsonlite", "knitr", "jsonvalidate", "V8", "sessioninfo"), upgrade = TRUE, dependencies = NA)
+          update.packages()
           cat("::endgroup::\n")
         shell: Rscript {0}
 
@@ -76,7 +77,7 @@ runs:
       - name: Validate cff
         run: | 
           # Validate cff
-          cat("::group::Validate cff\n")
+          cat("Validate cff\n")
           citfile <- yaml::read_yaml("${{ inputs.citation-path }}")
           # All elements to character
           citfile <- rapply(citfile, function(x) as.character(x), how = "replace")
@@ -143,7 +144,6 @@ runs:
             message("${{ inputs.citation-path }} is valid.")
             message("\n\n------")
           }
-          cat("::endgroup::\n")
         shell: Rscript {0}
         
         # Upload artifact
