@@ -1,7 +1,8 @@
-# dev
+# v2.1
 
 - New `cache-version` parameter.
-- Better handling of R packages.
+- Better handling of R packages via `pak` R package.
+- Improve cache of packages.
 
 # v2
 

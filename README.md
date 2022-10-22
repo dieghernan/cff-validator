@@ -86,104 +86,28 @@ See a quick demo:
       citation-path: "examples/CITATION.cff"
 ```
 
--   `cache-version`: default 1. If you need to invalidate the existing cache pass any other number and a new cache will be used.
+-   `cache-version`: default `1`. If you need to invalidate the existing cache pass any other number and a new cache will be used.
 
 
 See a full featured implementation on [this example](https://github.com/dieghernan/cff-validator/blob/main/.github/workflows/cff-validator-complete-matrix.yml).
 
-## Under the hood (for useRs)
+## For useRs
 
-This action runs a R script that can be easily replicated. See a full reprex:
+This action runs on R. For the same functionality
+you can use the **cffr** package:
 
-<details><summary><strong>R script</strong></summary>
+```r
 
-``` r
-# install_cran(c("yaml","jsonlite", "jsonvalidate", "knitr")
-
-citation_path <- "./key-error/CITATION.cff"
-
-citfile <- yaml::read_yaml(citation_path)
-# All elements to character
-citfile <- rapply(citfile, function(x) as.character(x), how = "replace")
-
-# Convert to json
-cit_temp <- tempfile(fileext = ".json")
-jsonlite::write_json(citfile, cit_temp, pretty = TRUE)
-
-# Manage brackets
-citfile_clean <- readLines(cit_temp)
-
-# Search brackets to keep
-# Keep ending and starting
-keep_lines <- grep('", "', citfile_clean)
-keep_lines <- c(keep_lines, grep("\\[$", citfile_clean))
-keep_lines <- c(keep_lines, grep(" \\],", citfile_clean))
-keep_lines <- c(keep_lines, grep(" \\]$", citfile_clean))
-keep_lines <- sort(unique(keep_lines))
-
-if (all(keep_lines > 0)) {
-  keep_string <- citfile_clean[keep_lines]
-  citfile_clean[keep_lines] <- ""
-}
-# Remove rest of brackets
-citfile_clean <- gsub('["', '"', citfile_clean, fixed = TRUE)
-citfile_clean <- gsub('"]', '"', citfile_clean, fixed = TRUE)
-
-if (all(keep_lines > 0)) {
-  # Add "good" brackets back
-  citfile_clean[keep_lines] <- keep_string
-}
-
-writeLines(citfile_clean, cit_temp)
-
-# Download latest scheme
-schema_temp <- tempfile("schema", fileext = ".json")
-download.file("https://raw.githubusercontent.com/citation-file-format/citation-file-format/main/schema.json",
-  schema_temp,
-  mode = "wb", quiet = TRUE
-)
-
-# Validate
-result <- jsonvalidate::json_validate(cit_temp,
-  schema_temp,
-  verbose = TRUE
-)
-# Results
-message("------\n")
-#> ------
-if (result == FALSE) {
-  print(knitr::kable(attributes(result)$errors,
-    align = "l",
-    caption = paste(citation_path, "errors:")
-  ))
-
-  message("\n\n------")
-  stop(citation_path, "file not valid. See Artifact: citation-cff-errors for details.")
-} else {
-  message(citation_path, "is valid.")
-  message("\n\n------")
-}
+cffr::cff_validate("CITATION.cff")
 #> 
-#> 
-#> Table: ./key-error/CITATION.cff errors:
-#> 
-#> |field           |message                          |
-#> |:---------------|:--------------------------------|
-#> |data            |has additional properties        |
-#> |data.authors.0  |no schemas match                 |
-#> |data.doi        |referenced schema does not match |
-#> |data.keywords.0 |is the wrong type                |
-#> |data.license    |referenced schema does not match |
-#> |data.url        |referenced schema does not match |
-#> 
-#> 
-#> ------
-#> Error in eval(expr, envir, enclos): ./key-error/CITATION.cfffile not valid. See Artifact: citation-cff-errors for details.
+#> cff_validate results——
+#> Congratulations! This .cff file is valid
+
 ```
 
-<sup>Created on 2021-09-06 by the [reprex package](https://reprex.tidyverse.org) (v2.0.1)</sup>
+See [`cffr::cff_validate()`](https://docs.ropensci.org/cffr/reference/cff_validate.html) for details.
 
-</details>
+
 
 ## References
 
