@@ -150,6 +150,7 @@ runs:
         
         # Report on success
       - name: Report success
+        shell: bash
         if: success()
         run: |
           echo "" >> $GITHUB_STEP_SUMMARY # this is a blank line
