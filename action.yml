@@ -40,14 +40,9 @@ runs:
       - name: Install pak
         run: |
           # Install pak
-          if (requireNamespace("pak", quietly = TRUE)) {
           cat("::group::Install pak\n")
           install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
           cat("::endgroup::\n") 
-          } else {
-            cat("pak already installed\n")
-          } 
-          
         shell: Rscript {0}
         
       - name: Install dependencies
