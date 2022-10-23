@@ -131,7 +131,8 @@ runs:
           # Get repo head and commit
           remoteurl <- git2r::remote_url()
           lastcommit <- git2r::last_commit()
-          commiturl <- paste0(remoteurl, "/blob/", lastcommit$sha, "/CITATION.cff")
+          path2file <- gsub("./", "", "${{ inputs.citation-path }}", perl = FALSE)
+          commiturl <- paste0(remoteurl, "/blob/", lastcommit$sha, "/", path2file)
 
           # Do link
           link <- paste0("[`${{ inputs.citation-path }}`](", commiturl, ")")
