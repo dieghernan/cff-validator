@@ -155,7 +155,7 @@ runs:
               file = "citation_cff_errors.md",
               append = TRUE
             )
-            stop("${{ inputs.citation-path }} file not valid. See Artifact: citation-cff-errors for details.")
+            stop("${{ inputs.citation-path }} file not valid. See Job Summary.")
           } else {
             writeLines(paste0(
               ":white_check_mark: Congratulations! ",
