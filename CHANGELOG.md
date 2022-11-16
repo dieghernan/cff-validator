@@ -1,3 +1,8 @@
+# dev
+
+- New `install-r` parameter.
+- Improvements on performance.
+
 # v2.1
 
 - New `cache-version` parameter.
