@@ -13,6 +13,8 @@ inputs:
     description: 'The version of the cache, change this from the default (1) to start over with a fresh cache.'
     required: false
     default: 1
+# pak cache management derived from https://github.com/r-lib/actions/blob/v2-branch/setup-r-dependencies/action.yaml
+# By Jim Hester
 runs:
   using: composite
   steps:
@@ -37,17 +39,23 @@ runs:
           key: ${{ steps.install.outputs.os-version }}-${{ steps.install.outputs.r-version }}-${{inputs.cache-version }}-cff
           restore-keys: ${{ steps.install.outputs.os-version }}-${{ steps.install.outputs.r-version }}-${{inputs.cache-version }}-cff
 
+      - name: Install pak
+        run: |
+          # Install pak
+          cat("::group::Install pak\n")
+          install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
+          cat("::endgroup::\n")
+        shell: Rscript {0}
 
       - name: Install dependencies
         run: |
           # Install dependencies
           cat("::group::Install/update packages\n")
-          install.packages("pacman")
-          
-          pacman::p_load(c("yaml", "jsonlite", "knitr", "jsonvalidate", "cffr",
-            "sessioninfo"), update = TRUE)
-            
-            
+          # Install/Update packages
+          Sys.setenv("PKGCACHE_HTTP_VERSION" = "2")
+          pak::pkg_install(c("yaml", "jsonlite", "knitr", "jsonvalidate", "cffr",
+            "git2r", "sessioninfo"),
+            upgrade = TRUE, dependencies = NA)
           cat("::endgroup::\n")
         shell: Rscript {0}
 
@@ -120,8 +128,14 @@ runs:
             verbose = TRUE
           )
 
+          # Get repo head and commit
+          remoteurl <- git2r::remote_url()
+          lastcommit <- git2r::last_commit()
+          path2file <- gsub("^./|^/", "", "${{ inputs.citation-path }}", perl = FALSE)
+          commiturl <- paste0(remoteurl, "/blob/", lastcommit$sha, "/", path2file)
+
           # Do link
-          link <- paste0("`${{ inputs.citation-path }}`")
+          link <- paste0("[`${{ inputs.citation-path }}`](", commiturl, ")")
 
 
           # Results
