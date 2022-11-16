@@ -83,6 +83,8 @@ See a quick demo:
 
 -   `cache-version`: default `1`. If you need to invalidate the existing cache pass any other number and a new cache will be used.
 
+-   `install-r`: default `false`. If `true` download and install R during the setup. 
+      If `false` use the existing installation in the GitHub Action image.
 
 See a full featured implementation on [this example](https://github.com/dieghernan/cff-validator/blob/main/.github/workflows/cff-validator-complete-matrix.yml).
 
