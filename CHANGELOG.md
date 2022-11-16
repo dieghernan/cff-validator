@@ -1,4 +1,4 @@
-# dev
+# v2.2
 
 - New `install-r` parameter.
 - Improvements on performance.
