@@ -19,7 +19,7 @@ runs:
       - name: Install R
         uses: r-lib/actions/setup-r@v2
         with:
-          install-r: true
+          install-r: false
           use-public-rspm: true
 
       - name: Query dependencies
@@ -42,8 +42,12 @@ runs:
         run: |
           # Install dependencies
           cat("::group::Install/update packages\n")
-          install.packages(c("yaml", "jsonlite", "knitr", "jsonvalidate", "cffr",
-            "git2r", "sessioninfo"))
+          install.packages("pacman")
+          
+          pacman::p_load(c("yaml", "jsonlite", "knitr", "jsonvalidate", "cffr",
+            "sessioninfo"), update = TRUE)
+            
+            
           cat("::endgroup::\n")
         shell: Rscript {0}
 
@@ -116,14 +120,8 @@ runs:
             verbose = TRUE
           )
 
-          # Get repo head and commit
-          remoteurl <- git2r::remote_url()
-          lastcommit <- git2r::last_commit()
-          path2file <- gsub("^./|^/", "", "${{ inputs.citation-path }}", perl = FALSE)
-          commiturl <- paste0(remoteurl, "/blob/", lastcommit$sha, "/", path2file)
-
           # Do link
-          link <- paste0("[`${{ inputs.citation-path }}`](", commiturl, ")")
+          link <- paste0("`${{ inputs.citation-path }}`")
 
 
           # Results
