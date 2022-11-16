@@ -27,7 +27,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Validate CITATION.cff
         uses: dieghernan/cff-validator@main
@@ -38,7 +38,7 @@ jobs:
 On error, the action produces a Job Summary with a high-level description of the errors found:
 
 <details><summary><strong>citation_cff_errors.md</strong></summary>
-Table: **./examples/key-error/CITATION.cff errors:**
+
 
 |field           |message                          |
 |:---------------|:--------------------------------|
