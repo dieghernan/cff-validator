@@ -1,3 +1,7 @@
+# v2.3
+
+- Fix [#8](https://github.com/dieghernan/cff-validator/issues/8), error on non-Git repos.
+
 # v2.2
 
 - New `install-r` parameter.
