@@ -143,7 +143,7 @@ runs:
 
           # Results
           if (result == FALSE) {
-            writeLines(paste0("\n:x: Requested CITATION.cff has errors"),
+            writeLines(paste0("\n:x: ${{ inputs.citation-path }} has errors"),
               con = "citation_cff_errors.md"
             )
             write(knitr::kable(attributes(result)$errors,
@@ -161,7 +161,7 @@ runs:
             stop("${{ inputs.citation-path }} file not valid. See Job Summary.")
           } else {
             writeLines(paste0(
-              ":white_check_mark: Congratulations! Requested CITATION.cff is valid"
+              ":white_check_mark: Congratulations! ${{ inputs.citation-path }} is valid"
             ),
             con = "citation_cff_ok.md"
             )
