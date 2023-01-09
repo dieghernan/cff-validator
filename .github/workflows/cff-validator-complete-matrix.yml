@@ -2,14 +2,16 @@ on:
   push:
     branches:
       - main
+  schedule:
+      - cron:  '30 16 1 * 2,5'
   workflow_dispatch:
 
 # Run on available environments on GHA
 # as on 2022-10-21
 
-name: CITATION-cff full matrix
+name: full-test-action
 jobs:
-  Validate-CITATION-cff:
+  full-test-action:
 
     runs-on: ${{ matrix.config.os }}
     name: ${{ matrix.config.os }}
