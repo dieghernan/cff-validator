@@ -1,6 +1,6 @@
 # cff-validator
 
-![latest-version](https://img.shields.io/github/v/release/dieghernan/cff-validator) [![CITATION-cff](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator.yml/badge.svg)](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator.yml) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5348443.svg)](https://doi.org/10.5281/zenodo.5348443)
+![latest-version](https://img.shields.io/github/v/release/dieghernan/cff-validator) [![CITATION-cff](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator.yml/badge.svg)](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator.yml) [![full-test-action](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator-complete-matrix.yml/badge.svg)](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator-complete-matrix.yml) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5348443.svg)](https://doi.org/10.5281/zenodo.5348443)
 
 A GitHub action to validate `CITATION.cff` files with R.
 
