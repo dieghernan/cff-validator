@@ -37,6 +37,17 @@ runs:
         with:
           install-r: true
           use-public-rspm: true
+           
+          
+      - name: Install libcurl on Linux
+        if: runner.os == 'Linux'
+        run: |
+          # Install libcurl4-openssl-dev
+          echo "::group::Install libcurl4-openssl-dev"
+          sudo apt-get update
+          sudo apt-get install libcurl4-openssl-dev
+          echo "::endgroup::"
+        shell: bash
 
       - name: Query dependencies
         id: install
