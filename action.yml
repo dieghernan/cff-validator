@@ -112,16 +112,12 @@ runs:
           # Convert to json
           cit_temp <- jsonlite::toJSON(citfile, pretty = TRUE, auto_unbox = TRUE)
 
-          # Download latest scheme
-          schema_temp <- tempfile("schema", fileext = ".json")
-          download.file("https://raw.githubusercontent.com/citation-file-format/citation-file-format/main/schema.json",
-            schema_temp,
-            mode = "wb", quiet = TRUE
-          )
+          # Use local copy of schema, included with cffr
+          schema_local <- system.file("schema/schema.json", package = "cffr")
 
           # Validate
           result <- jsonvalidate::json_validate(cit_temp,
-            schema_temp,
+            schema_local,
             verbose = TRUE
           )
 
@@ -130,12 +126,17 @@ runs:
             writeLines(paste0("\n:x: ${{ inputs.citation-path }} has errors"),
               con = "citation_cff_errors.md"
             )
-            write(knitr::kable(attributes(result)$errors,
-              align = "l"
-            ),
+          # Format outputs
+          get_errors <- attr(result, "errors")
+          get_errors$field <- gsub(
+            "^data", "cff",
+            get_errors$field
+          )
+
+          write(knitr::kable(get_errors, align = "l"),
             file = "citation_cff_errors.md",
             append = TRUE
-            )
+          )
 
 
             write("\n\nSee [Guide to Citation File Format schema version 1.2.0](https://github.com/citation-file-format/citation-file-format/blob/main/schema-guide.md) for debugging.",
