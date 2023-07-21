@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this software in your research, please cite it as below."
 title: "cff-validator"
-version: "v2.3"
+version: "v3"
 doi: 10.5281/zenodo.5348443
 abstract: "A GitHub action to validate CITATION.cff files with R."
 authors:

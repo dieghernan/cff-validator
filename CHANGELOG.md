@@ -1,4 +1,6 @@
-# dev
+# v3
+
+Note that `v3`` is a sliding tag, and we introduce non-breaking changes to it.
 
 - Improve underlying code.
 - Using a copy of schema.json shipped with {cffr} to avoid SSL/SSH issues [#10](https://github.com/dieghernan/cff-validator/issues/10)

@@ -36,16 +36,14 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Validate CITATION.cff
-        uses: dieghernan/cff-validator@main
+        uses: dieghernan/cff-validator@v3
 
 ```
 
 On error, the action produces a Job Summary with a high-level description of the
 errors found:
 
-<details>
-
-<summary><strong>citation_cff_errors.md</strong></summary>
+<details><summary><strong>citation_cff_errors.md</strong></summary>
 
 | field           | message                          |
 |:----------------|:---------------------------------|
@@ -77,24 +75,24 @@ error](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validat
 
 See a quick demo:
 
-![](assets/demo.gif)
+![Demo gif showing how to create a badge for a GH action](assets/demo.gif)
 
 ## Inputs available
 
--   `citation-path`: Path to .cff file to be validated. By default it selects a
+- `citation-path`: Path to .cff file to be validated. By default it selects a
     `CITATION.cff` file on the root of the repository:
 
 ``` yaml
   - name: Validate CITATION.cff
-    uses: dieghernan/cff-validator@main
+    uses: dieghernan/cff-validator@v3
     with:
       citation-path: "examples/CITATION.cff"
 ```
 
--   `cache-version`: default `1`. If you need to invalidate the existing cache
+- `cache-version`: default `1`. If you need to invalidate the existing cache
     pass any other number and a new cache will be used.
 
--   `install-r`: default `false`. If `true` download and install R during the
+- `install-r`: default `false`. If `true` download and install R during the
     setup. If `false` use the existing installation in the GitHub Action image.
 
 See a full featured implementation on [this
