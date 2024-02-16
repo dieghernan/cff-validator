@@ -126,18 +126,17 @@ runs:
             writeLines(paste0("\n:x: ${{ inputs.citation-path }} has errors"),
               con = "citation_cff_errors.md"
             )
-          # Format outputs
-          get_errors <- attr(result, "errors")
-          get_errors$field <- gsub(
-            "^data", "cff",
-            get_errors$field
-          )
-
-          write(knitr::kable(get_errors, align = "l"),
-            file = "citation_cff_errors.md",
-            append = TRUE
-          )
-
+            # Format outputs
+            get_errors <- attr(result, "errors")
+            get_errors$field <- gsub(
+              "^data", "cff",
+              get_errors$field
+            )
+  
+            write(knitr::kable(get_errors, align = "l"),
+              file = "citation_cff_errors.md",
+              append = TRUE
+            )
 
             write("\n\nSee [Guide to Citation File Format schema version 1.2.0](https://github.com/citation-file-format/citation-file-format/blob/main/schema-guide.md) for debugging.",
               file = "citation_cff_errors.md",
