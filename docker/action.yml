@@ -1,0 +1,18 @@
+# Workflow derived from https://github.com/pharmaverse/admiralci
+
+name: Validate CFF
+description: "Validate your repository's CITATION.cff file using R software"
+
+inputs:
+  cffpath:
+    description: 'Path to .cff file to be validated'
+    required: false
+    default: 'CITATION.cff'
+    type: string
+
+runs:
+  using: 'docker'
+  image: './Dockerfile'
+  args:
+    - ${{ inputs.cffpath }}
+
