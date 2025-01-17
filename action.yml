@@ -17,7 +17,7 @@ inputs:
     description: 'If "true" download and install R during the setup. If "false"
       use the existing installation in the GitHub Action image,'
     required: false
-    default: false
+    default: true
 # pak cache management derived from https://github.com/r-lib/actions/blob/v2-branch/setup-r-dependencies/action.yaml
 # By Jim Hester
 runs:
