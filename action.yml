@@ -49,6 +49,6 @@ runs:
       if: steps.err.outputs.error == 'true'
       shell: bash
       run: |
-        echo "::error:: ${{ github.event.client_payload.citation-path }} has errors, see Job Summary"
+        echo "::error:: CFF file has errors, see Job Summary"
         exit 1
 

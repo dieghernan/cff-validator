@@ -82,7 +82,7 @@ if (result == FALSE) {
 
   cat(paste0(
     "::warning::", cffpath,
-    " has errors, see Job Summary of this GH action for details\n"
+    " has errors, see Job Summary of this GH action for details.\n"
   ))
 
 
@@ -96,4 +96,8 @@ if (result == FALSE) {
     ),
     con = "citation_cff.md"
   )
+  cat(paste0(
+    "::notice ::", cffpath,
+    " is a valid CFF file.\n"
+  ))
 }
