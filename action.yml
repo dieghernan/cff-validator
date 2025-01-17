@@ -14,8 +14,7 @@ inputs:
     required: false
     default: 1
   install-r:
-    description: 'If "true" download and install R during the setup. If "false"
-      use the existing installation in the GitHub Action image,'
+    description: 'Soft deprecated, needs to be always installed'
     required: false
     default: true
 # pak cache management derived from https://github.com/r-lib/actions/blob/v2-branch/setup-r-dependencies/action.yaml
@@ -25,19 +24,9 @@ runs:
   steps:
       - name: Install R
         uses: r-lib/actions/setup-r@v2
-        if: runner.os != 'macOS'
-        with:
-          install-r: ${{ inputs.install-r }}
-          use-public-rspm: true
-
-        # Need to install R on macOS
-      - name: Install R on macOS
-        uses: r-lib/actions/setup-r@v2
-        if: runner.os == 'macOS'
         with:
           install-r: true
           use-public-rspm: true
-
 
       - name: Install libcurl on Linux
         if: runner.os == 'Linux'
@@ -132,7 +121,7 @@ runs:
               "^data", "cff",
               get_errors$field
             )
-  
+
             write(knitr::kable(get_errors, align = "l"),
               file = "citation_cff_errors.md",
               append = TRUE
