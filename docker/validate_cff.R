@@ -30,12 +30,16 @@ option_list <- list(
 )
 opt_parser <- OptionParser(option_list = option_list)
 opt <- parse_args(opt_parser)
+cffpath <- opt$cffpath
 
 
+# clean files
+if (file.exists("citation_cff.md")) unlink("citation_cff.md")
+if (file.exists("issue.md")) unlink("issue.md")
 
 
 # Validate cff ----
-cffpath <- opt$cffpath
+
 
 cat("Validating cff\n")
 citfile <- yaml::read_yaml(cffpath)
@@ -56,8 +60,8 @@ result <- jsonvalidate::json_validate(cit_temp,
 
 # Results
 if (result == FALSE) {
-  writeLines(paste0("\n:x: ", cffpath, " has errors"),
-    con = "citation_cff_errors.md"
+  writeLines(paste0("\n:x: ", cffpath, " has errors\n"),
+    con = "citation_cff.md"
   )
   # Format outputs
   get_errors <- attr(result, "errors")
@@ -67,20 +71,29 @@ if (result == FALSE) {
   )
 
   write(knitr::kable(get_errors, align = "l"),
-    file = "citation_cff_errors.md",
+    file = "citation_cff.md",
     append = TRUE
   )
 
   write("\n\nSee [Guide to Citation File Format schema version 1.2.0](https://github.com/citation-file-format/citation-file-format/blob/main/schema-guide.md) for debugging.",
-    file = "citation_cff_errors.md",
+    file = "citation_cff.md",
     append = TRUE
   )
-  stop(paste0(cffpath, " file not valid. See Job Summary."))
+
+  cat(paste0(
+    "::warning::", cffpath,
+    " has errors, see Job Summary of this GH action for details\n"
+  ))
+
+
+  cat(paste0(cffpath, " file not valid. See Job Summary."))
+
+  write("ERROR", file = "issue.md")
 } else {
   writeLines(
     paste0(
-      ":white_check_mark: Congratulations! ", cffpath, " is valid"
+      "\n:white_check_mark: Congratulations! ", cffpath, " is valid\n"
     ),
-    con = "citation_cff_ok.md"
+    con = "citation_cff.md"
   )
 }

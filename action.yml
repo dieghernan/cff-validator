@@ -10,11 +10,11 @@ inputs:
     required: false
     default: 'CITATION.cff'
   cache-version:
-    description: 'The version of the cache, change this from the default (1) to start over with a fresh cache.'
+    description: 'Soft deprecated'
     required: false
     default: 1
   install-r:
-    description: 'Soft deprecated, needs to be always installed'
+    description: 'Soft deprecated'
     required: false
     default: true
 # pak cache management derived from https://github.com/r-lib/actions/blob/v2-branch/setup-r-dependencies/action.yaml
@@ -26,3 +26,29 @@ runs:
       uses: dieghernan/cff-validator/docker@dev
       with:
         cffpath: "${{ inputs.citation-path }}"
+
+      # Report check
+    - name: Upload results
+      shell: bash
+      run: |
+        # Upload results
+        cat citation_cff.md >$GITHUB_STEP_SUMMARY
+
+    - name: Check for errors
+      id: err
+      shell: bash
+      run: |
+        # Identify errors
+        err=false
+        if test -f "issue.md"; then
+          err=true
+        fi
+        echo "error=$err" >> $GITHUB_OUTPUT
+
+    - name: Fail workflow
+      if: steps.err.outputs.error == 'true'
+      shell: bash
+      run: |
+        echo "::error:: ${{ github.event.client_payload.citation-path }} has errors, see Job Summary"
+        exit 1
+

@@ -33,3 +33,4 @@ jobs:
         uses: dieghernan/cff-validator@dev
         with:
           citation-path: "./examples/key-error/CITATION.cff"
+
