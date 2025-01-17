@@ -13,9 +13,9 @@ if (!requireNamespace("cffr", quietly = TRUE)) {
 }
 if (!requireNamespace("optparse", quietly = TRUE)) {
   suppressMessages(install.packages("optparse",
-                                    repos = "https://cloud.r-project.org",
-                                    verbose = FALSE,
-                                    quiet = TRUE
+    repos = "https://cloud.r-project.org",
+    verbose = FALSE,
+    quiet = TRUE
   ))
 }
 
@@ -23,9 +23,9 @@ if (!requireNamespace("optparse", quietly = TRUE)) {
 library(optparse)
 option_list <- list(
   make_option(c("-p", "--cffpath"),
-              type = "character",
-              help = "package name (REQUIRED)",
-              metavar = "character"
+    type = "character",
+    help = "package name (REQUIRED)",
+    metavar = "character"
   )
 )
 opt_parser <- OptionParser(option_list = option_list)
@@ -50,14 +50,14 @@ schema_local <- system.file("schema/schema.json", package = "cffr")
 
 # Validate
 result <- jsonvalidate::json_validate(cit_temp,
-                                      schema_local,
-                                      verbose = TRUE
+  schema_local,
+  verbose = TRUE
 )
 
 # Results
 if (result == FALSE) {
-  writeLines(paste0("\n:x: ${{ inputs.citation-path }} has errors"),
-             con = "citation_cff_errors.md"
+  writeLines(paste0("\n:x: ", cffpath, " has errors"),
+    con = "citation_cff_errors.md"
   )
   # Format outputs
   get_errors <- attr(result, "errors")
@@ -67,19 +67,20 @@ if (result == FALSE) {
   )
 
   write(knitr::kable(get_errors, align = "l"),
-        file = "citation_cff_errors.md",
-        append = TRUE
+    file = "citation_cff_errors.md",
+    append = TRUE
   )
 
   write("\n\nSee [Guide to Citation File Format schema version 1.2.0](https://github.com/citation-file-format/citation-file-format/blob/main/schema-guide.md) for debugging.",
-        file = "citation_cff_errors.md",
-        append = TRUE
+    file = "citation_cff_errors.md",
+    append = TRUE
   )
-  stop("${{ inputs.citation-path }} file not valid. See Job Summary.")
+  stop(paste0(cffpath, " file not valid. See Job Summary."))
 } else {
-  writeLines(paste0(
-    ":white_check_mark: Congratulations! ${{ inputs.citation-path }} is valid"
-  ),
-  con = "citation_cff_ok.md"
+  writeLines(
+    paste0(
+      ":white_check_mark: Congratulations! ", cffpath, " is valid"
+    ),
+    con = "citation_cff_ok.md"
   )
 }

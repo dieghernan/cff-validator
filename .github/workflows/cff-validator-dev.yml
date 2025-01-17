@@ -16,14 +16,6 @@ jobs:
       matrix:
         config:
           - {os: ubuntu-latest}
-          - {os: macos-latest}
-          - {os: windows-latest} 
-          - {os: windows-2019}
-          - {os: ubuntu-22.04}
-          #- {os: ubuntu-18.04}
-          - {os: macos-12}
-          #- {os: macos-10.15}
-          
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
@@ -31,14 +23,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-          
+
       - name: Validate ./examples/key-complete/CITATION.cff
         uses: dieghernan/cff-validator@dev
         with:
           citation-path: "./examples/key-complete/CITATION.cff"
-        
+
       - name: Validate ./examples/key-error/CITATION.cff
         uses: dieghernan/cff-validator@dev
         with:
           citation-path: "./examples/key-error/CITATION.cff"
-          
