@@ -1,23 +1,19 @@
+name: Soft deprecation
 on:
-  schedule:
-    - cron: '00 10 * * *'
   workflow_dispatch:
 
-name: CITATION.cff-error
 jobs:
-  Validate-CITATION-cff-error:
+  Soft-deprecation:
     runs-on: ubuntu-latest
-    name: Validate CITATION.cff with errors
+    name: Validate CITATION.cff
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Validate examples/key-error/CITATION.cff
+      - name: Validate CITATION.cff
         uses: dieghernan/cff-validator@main
         with:
-          citation-path: "./examples/key-error/CITATION.cff"
           cache-version: 2
+          install-r: false
 

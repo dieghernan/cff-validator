@@ -1,3 +1,14 @@
+# v4
+
+Note that `v4` is a sliding tag, and we introduce non-breaking changes to it.
+
+**Breaking change**: The action now uses a Docker container, and would require
+to be run on a Linux virtual machine (`os: ubuntu-*`). MacOS and Windows actions
+would need to switch to `ubuntu-*`.
+
+-   Migration to Docker container
+    [**rocker/tidyverse**](https://hub.docker.com/r/rocker/tidyverse/).
+
 # v3
 
 Note that `v3` is a sliding tag, and we introduce non-breaking changes to it.
