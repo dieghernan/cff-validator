@@ -90,7 +90,7 @@ See a quick demo:
 
 ``` yaml
   - name: Validate CITATION.cff
-    uses: dieghernan/cff-validator@v3
+    uses: dieghernan/cff-validator@v4
     with:
       citation-path: "examples/CITATION.cff"
 ```
