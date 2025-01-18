@@ -21,3 +21,4 @@ jobs:
         with:
           citation-path: "./examples/key-error/CITATION.cff"
           cache-version: 2
+

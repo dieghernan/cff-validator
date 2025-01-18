@@ -7,6 +7,9 @@
 
 A GitHub action to validate `CITATION.cff` files with R.
 
+**Breaking change: v4 only works on Linux, upgrade your v3 to run on
+`ubuntu-*`.**
+
 ## Introduction
 
 If you have a [Citation File Format
@@ -36,7 +39,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Validate CITATION.cff
-        uses: dieghernan/cff-validator@v3
+        uses: dieghernan/cff-validator@v4
 ```
 
 On error, the action produces a Job Summary with a high-level description of the
@@ -44,7 +47,9 @@ errors found:
 
 <details>
 
-<summary><strong>citation_cff_errors.md</strong></summary>
+<summary><strong>citation_cff.md</strong></summary>
+
+❌ CITATION.cff has errors
 
 | field           | message                          |
 |:----------------|:---------------------------------|
@@ -55,7 +60,7 @@ errors found:
 | data.license    | referenced schema does not match |
 | data.url        | referenced schema does not match |
 
-See [Guide to Citation File Format schema version
+: See [Guide to Citation File Format schema version
 1.2.0](https://github.com/citation-file-format/citation-file-format/blob/main/schema-guide.md)
 for debugging.
 
@@ -90,10 +95,11 @@ See a quick demo:
       citation-path: "examples/CITATION.cff"
 ```
 
--   `cache-version`: default `1`. If you need to invalidate the existing cache
-    pass any other number and a new cache will be used.
+-   (Soft) Deprecated parameters in **v4**:
 
--   `install-r`: Soft-deprecated.
+    -   `cache-version`
+
+    -   `install-r`.
 
 See a full featured implementation on [this
 example](https://github.com/dieghernan/cff-validator/blob/main/.github/workflows/cff-validator-complete-matrix.yml).
