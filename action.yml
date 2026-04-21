@@ -23,7 +23,7 @@ runs:
   using: composite
   steps:
     - name: Validate cff
-      uses: dieghernan/cff-validator/docker@main
+      uses: ./docker
       with:
         cffpath: "${{ inputs.citation-path }}"
 
