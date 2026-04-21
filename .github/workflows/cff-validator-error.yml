@@ -1,9 +1,12 @@
 on:
   schedule:
-    - cron: '00 10 * * *'
+  - cron: '00 10 * * *'
   workflow_dispatch:
 
+
 name: CITATION.cff-error
+permissions:
+  contents: write
 jobs:
   Validate-CITATION-cff-error:
     runs-on: ubuntu-latest
@@ -12,12 +15,11 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+    - name: Checkout
+      uses: actions/checkout@v6
 
-      - name: Validate examples/key-error/CITATION.cff
-        uses: dieghernan/cff-validator@main
-        with:
-          citation-path: "./examples/key-error/CITATION.cff"
-          cache-version: 2
-
+    - name: Validate examples/key-error/CITATION.cff
+      uses: dieghernan/cff-validator@main
+      with:
+        citation-path: "./examples/key-error/CITATION.cff"
+        cache-version: 2

@@ -14,5 +14,4 @@ runs:
   using: 'docker'
   image: './Dockerfile'
   args:
-    - ${{ inputs.cffpath }}
-
+  - ${{ inputs.cffpath }}

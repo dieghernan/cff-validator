@@ -6,7 +6,8 @@ branding:
   color: 'gray-dark'
 inputs:
   citation-path:
-    description: 'Path to .cff file to be validated. By default it selects a CITATION.cff file on the root of the repository.'
+    description: 'Path to .cff file to be validated. By default it selects a
+      CITATION.cff file on the root of the repository.'
     required: false
     default: 'CITATION.cff'
   cache-version:
@@ -22,33 +23,31 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Validate cff
-      uses: ./docker
-      with:
-        cffpath: "${{ inputs.citation-path }}"
+  - name: Validate cff
+    uses: ./docker
+    with:
+      cffpath: "${{ inputs.citation-path }}"
+    # Report check
+  - name: Upload results
+    shell: bash
+    run: |
+      # Upload results
+      cat citation_cff.md >$GITHUB_STEP_SUMMARY
 
-      # Report check
-    - name: Upload results
-      shell: bash
-      run: |
-        # Upload results
-        cat citation_cff.md >$GITHUB_STEP_SUMMARY
+  - name: Check for errors
+    id: err
+    shell: bash
+    run: |
+      # Identify errors
+      err=false
+      if test -f "issue.md"; then
+        err=true
+      fi
+      echo "error=$err" >> $GITHUB_OUTPUT
 
-    - name: Check for errors
-      id: err
-      shell: bash
-      run: |
-        # Identify errors
-        err=false
-        if test -f "issue.md"; then
-          err=true
-        fi
-        echo "error=$err" >> $GITHUB_OUTPUT
-
-    - name: Fail workflow
-      if: steps.err.outputs.error == 'true'
-      shell: bash
-      run: |
-        echo "::error:: CFF file has errors, see Job Summary"
-        exit 1
-
+  - name: Fail workflow
+    if: steps.err.outputs.error == 'true'
+    shell: bash
+    run: |
+      echo "::error:: CFF file has errors, see Job Summary"
+      exit 1

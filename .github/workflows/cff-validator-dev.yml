@@ -1,10 +1,13 @@
 on:
   push:
     branches:
-      - dev
+    - dev
   workflow_dispatch:
 
+
 name: dev CITATION.cff
+permissions:
+  contents: write
 jobs:
   Validate-dev-CITATION-cff:
 
@@ -15,22 +18,20 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: ubuntu-latest}
+        - {os: ubuntu-latest}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+    - name: Checkout
+      uses: actions/checkout@v6
 
-      - name: Validate ./examples/key-complete/CITATION.cff
-        uses: dieghernan/cff-validator@dev
-        with:
-          citation-path: "./examples/key-complete/CITATION.cff"
+    - name: Validate ./examples/key-complete/CITATION.cff
+      uses: dieghernan/cff-validator@dev
+      with:
+        citation-path: "./examples/key-complete/CITATION.cff"
 
-      - name: Validate ./examples/key-error/CITATION.cff
-        uses: dieghernan/cff-validator@dev
-        with:
-          citation-path: "./examples/key-error/CITATION.cff"
-
+    - name: Validate ./examples/key-error/CITATION.cff
+      uses: dieghernan/cff-validator@dev
+      with:
+        citation-path: "./examples/key-error/CITATION.cff"

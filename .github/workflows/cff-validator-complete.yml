@@ -1,10 +1,13 @@
 on:
   push:
     branches:
-      - main
+    - main
   workflow_dispatch:
 
+
 name: CITATION.cff-complete
+permissions:
+  contents: write
 jobs:
   Validate-CITATION-cff-complete:
     runs-on: ubuntu-latest
@@ -13,11 +16,10 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+    - name: Checkout
+      uses: actions/checkout@v6
 
-      - name: Validate examples/key-complete/CITATION.cff
-        uses: dieghernan/cff-validator@main
-        with:
-          citation-path: "./examples/key-complete/CITATION.cff"
-
+    - name: Validate examples/key-complete/CITATION.cff
+      uses: dieghernan/cff-validator@main
+      with:
+        citation-path: "./examples/key-complete/CITATION.cff"
