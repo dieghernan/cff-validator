@@ -72,7 +72,13 @@ path](https://github.com/dieghernan/cff-validator/tree/main/.github/workflows).
 ## Add a badge to your repo
 
 You can easily create a badge showing the current status of validation of your
-`CITATION.cff` like this:
+`CITATION.cff` by adding this snippet to your repository's `README.md`:
+
+```markdown
+[![CITATION-cff](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator.yml/badge.svg)](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator.yml)
+```
+
+which will then display:
 
 [![CITATION.cff](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator.yml/badge.svg)](https://github.com/dieghernan/cff-validator/actions/workflows/cff-validator.yml)
 
