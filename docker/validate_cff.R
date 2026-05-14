@@ -5,8 +5,10 @@
 
 install.packages("pak")
 pak::pak(c("optparse", "jsonvalidate"), dependencies = TRUE, ask = FALSE)
-install.packages("cffr")
-
+install.packages(
+  "cffr",
+  repos = "https://cloud.r-project.org"
+)
 # check if needed : package name and working dir path as input arguments :
 library(optparse)
 option_list <- list(
