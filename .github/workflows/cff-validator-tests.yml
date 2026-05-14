@@ -5,11 +5,11 @@ on:
   workflow_dispatch:
 
 
-name: CITATION.cff-complete
+name: CITATION.cff-tests
 permissions:
   contents: write
 jobs:
-  Validate-CITATION-cff-complete:
+  Validate-CITATION-cff-tests:
     runs-on: ubuntu-latest
     name: Validate CITATION.cff
     env:
@@ -19,7 +19,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v6
 
-    - name: Validate examples/key-complete/CITATION.cff
+    - name: Validate examples/key-tests/CITATION_languages.cff
       uses: dieghernan/cff-validator@main
       with:
-        citation-path: "./examples/key-complete/CITATION.cff"
+        citation-path: "./examples/key-tests/CITATION_languages.cff"
