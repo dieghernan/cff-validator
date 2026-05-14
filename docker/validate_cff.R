@@ -4,9 +4,8 @@
 # 0. Setup ----
 
 install.packages("pak")
-
-pak::pak("cffr", dependencies = TRUE, ask = FALSE)
-pak::pak("optparse", dependencies = TRUE, ask = FALSE)
+pak::pak(c("optparse", "jsonvalidate"), dependencies = TRUE, ask = FALSE)
+install.packages("cffr")
 
 # check if needed : package name and working dir path as input arguments :
 library(optparse)
