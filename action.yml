@@ -24,7 +24,7 @@ runs:
   using: composite
   steps:
   - name: Validate cff
-    uses: dieghernan/cff-validator/docker@10d80d670d582485aa28e788e8f68ed6b7b7c7d4 # v5 - Review on release
+    uses: dieghernan/cff-validator/docker@05739cf16bedafd7a4d6e770286be38947f38117 # v5 - Review on release
     with:
       cffpath: "${{ inputs.citation-path }}"
     # Report check
