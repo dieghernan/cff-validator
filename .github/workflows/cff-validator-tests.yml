@@ -17,7 +17,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Validate examples/key-tests/CITATION_languages.cff
       uses: dieghernan/cff-validator@main
