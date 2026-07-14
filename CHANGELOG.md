@@ -2,6 +2,14 @@
 
 Note that `v5` is a sliding tag, and we introduce non-breaking changes to it.
 
+## v5.1.1 (2026-07-14)
+
+- Improve the Docker action runtime by preserving the Job Summary when
+  validation exits unexpectedly, using canonical GitHub notice syntax and
+  installing runtime dependencies without **pak** while keeping **V8**
+  explicit.
+- Add Dependabot coverage for the root Dockerfile.
+
 ## v5.1.0 (2026-07-14)
 
 - Use the root Docker action directly, removing the internal pinned Docker action reference and keeping validation tied to the commit selected by the caller ([#26](https://github.com/dieghernan/cff-validator/issues/26)).
