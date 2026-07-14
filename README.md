@@ -39,7 +39,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Validate CITATION.cff
-        uses: dieghernan/cff-validator@v4
+        uses: dieghernan/cff-validator@v5
 ```
 
 On error, the action produces a Job Summary with a high-level description of the
@@ -90,7 +90,7 @@ See a quick demo:
 
 ``` yaml
   - name: Validate CITATION.cff
-    uses: dieghernan/cff-validator@v4
+    uses: dieghernan/cff-validator@v5
     with:
       citation-path: "examples/CITATION.cff"
 ```
