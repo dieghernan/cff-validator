@@ -3,12 +3,8 @@
 
 # 0. Setup ----
 
-install.packages("pak")
-pak::pak(c("optparse", "jsonvalidate"), dependencies = TRUE, ask = FALSE)
-install.packages(
-  "cffr",
-  repos = "https://cloud.r-project.org"
-)
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+install.packages(c("optparse", "jsonvalidate", "V8", "cffr"))
 library(optparse)
 option_list <- list(
   make_option(
