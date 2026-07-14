@@ -3,19 +3,12 @@
 
 # 0. Setup ----
 
-install.packages("pak")
-pak::pak(c("optparse", "jsonvalidate"), dependencies = TRUE, ask = FALSE)
-install.packages(
-  "cffr",
-  repos = "https://cloud.r-project.org"
-)
-# check if needed : package name and working dir path as input arguments :
 library(optparse)
 option_list <- list(
   make_option(
     c("-p", "--cffpath"),
     type = "character",
-    help = "package name (REQUIRED)",
+    help = "Path to the .cff file to validate (REQUIRED)",
     metavar = "character"
   )
 )
@@ -89,7 +82,7 @@ if (result == FALSE) {
     " has errors, see Job Summary of this GH action for details.\n"
   ))
 
-  cat(paste0(cffpath, " file not valid. See Job Summary."))
+  cat(paste0(cffpath, " file not valid. See Job Summary.\n"))
 
   write("ERROR", file = "issue.md")
 } else {
@@ -102,7 +95,7 @@ if (result == FALSE) {
     con = "citation_cff.md"
   )
   cat(paste0(
-    "::notice ::",
+    "::notice::",
     cffpath,
     " is a valid CFF file.\n"
   ))
