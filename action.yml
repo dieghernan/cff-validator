@@ -18,36 +18,8 @@ inputs:
     description: 'Soft deprecated'
     required: false
     default: true
-# pak cache management derived from https://github.com/r-lib/actions/blob/v2-branch/setup-r-dependencies/action.yaml
-# By Jim Hester
 runs:
-  using: composite
-  steps:
-  - name: Validate cff
-    uses: dieghernan/cff-validator/docker@05739cf16bedafd7a4d6e770286be38947f38117 # v5 - Review on release
-    with:
-      cffpath: "${{ inputs.citation-path }}"
-    # Report check
-  - name: Upload results
-    shell: bash
-    run: |
-      # Upload results
-      cat citation_cff.md >$GITHUB_STEP_SUMMARY
-
-  - name: Check for errors
-    id: err
-    shell: bash
-    run: |
-      # Identify errors
-      err=false
-      if test -f "issue.md"; then
-        err=true
-      fi
-      echo "error=$err" >> $GITHUB_OUTPUT
-
-  - name: Fail workflow
-    if: steps.err.outputs.error == 'true'
-    shell: bash
-    run: |
-      echo "::error:: CFF file has errors, see Job Summary"
-      exit 1
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+  - ${{ inputs.citation-path }}

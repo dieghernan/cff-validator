@@ -2,7 +2,7 @@
 
 Note that `v5` is a sliding tag, and we introduce non-breaking changes to it.
 
-- Docker action is pinned to the same commit SHA as the parent workflow to avoid security issues thanks to [\@mgovers](https://github.com/mgovers) ([#26](https://github.com/dieghernan/cff-validator/issues/26))
+- Use the root Docker action directly, removing the internal pinned Docker action reference and keeping validation tied to the commit selected by the caller ([#26](https://github.com/dieghernan/cff-validator/issues/26)).
 - Change the validation engine to **ajv**, in line with **cffr** [1.4.0](https://docs.ropensci.org/cffr/news/index.html#cffr-140).
 
 ## v5.0.1 (2026-04-21)
