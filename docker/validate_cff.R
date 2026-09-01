@@ -62,9 +62,10 @@ if (result == FALSE) {
   # Format outputs
   get_errors <- attr(result, "errors")
   field <- get_errors$instancePath
-  field[field == ""] <- "/"
+  field[!nzchar(field)] <- "/"
   field <- paste0("cff", field)
   get_errors$field <- field
+  get_errors <- get_errors[, unique(c("field", "message", names(get_errors)))]
 
   write(
     knitr::kable(get_errors, align = "l"),
