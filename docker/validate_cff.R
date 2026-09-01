@@ -67,7 +67,7 @@ if (result == FALSE) {
   get_errors$field <- field
 
   write(
-    knitr::kable(get_errors[, c("field", "message")], align = "l"),
+    knitr::kable(get_errors, align = "l"),
     file = "citation_cff.md",
     append = TRUE
   )
